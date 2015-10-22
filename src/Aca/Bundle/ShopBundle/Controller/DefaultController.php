@@ -26,27 +26,30 @@ class DefaultController extends Controller
     {
         // Pull the information out of the form (get can take information from different sources, including forms)
         $username = $req->get('username');
-        echo 'Username=' . $username . '<br />';
+        echo 'Username entered: ' . $username . '<br />';
 
         $password = $req->get('password');
-        echo 'Password=' . $password . '<br />';
+        echo 'Password entered: ' . $password . '<br /><br />';
 
         // Error handling for if the username or password is blank
         if($username == "") {
-            echo "<h3 style='color:red'>Please enter a username</h3>";
+
+            // CAN WE ROUTE INFORMATION FROM THIS FILE INTO THE TWIG SO THAT OUR TWIG CAN CONTEXTUALLY KNOW IF THE ISSUE IS A USERNAME OR PASSWORD PROBLEM?
+            return $this->render('AcaShopBundle:LoginForm:loginfailure.html.twig');
+            //echo "<h3 style='color:red'>Please enter a username</h3>";
         }
         if($password == "") {
-            echo "<h3 style='color:red'>Please enter a password</h3>";
-        }
-        if($username == "" || $password == "") {
-            exit();
+            return $this->render('AcaShopBundle:LoginForm:loginfailure.html.twig');
+            //echo "<h3 style='color:red'>Please enter a password</h3>";
         }
 
         // Prevent MYSQL injection - if the username or password use illegal characters, exit
         if(!preg_match("#^[a-zA-Z0-9]+$#", $username) || !preg_match("#^[a-zA-Z0-9]+$#", $password)) {
 
-            echo "<h3 style='color:red'>Your username or password contains invalid characters</h3>";
-            exit();
+            return $this->render('AcaShopBundle:LoginForm:loginfailure.html.twig');
+
+            //echo "<h3 style='color:red'>Your username or password contains invalid characters</h3>";
+            //exit();
         }
 
         // Set up a query to check against the DB
@@ -67,15 +70,20 @@ class DefaultController extends Controller
         if($result->num_rows > 0) {
 
             // If they are valid, set to SESSION and make the login boxes go away
-            echo "Welcome!";
+            // Clear old login
+            session_destroy();
 
+            // Start new login
             session_start();
-            $_SESSION['username'] = "";
-            $_SESSION['password'] = "";
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
+
+            // DO WE ALWAYS HAVE TO RETURN A RENDER ('THE CONTROLLER MUST RETURN A RESPONSE')
+            return $this->render('AcaShopBundle:LoginForm:loginsuccess.html.twig');
 
         } else {
 
-            echo "Invalid login!";
+            return $this->render('AcaShopBundle:LoginForm:loginfailure.html.twig');
         }
     }
 }
