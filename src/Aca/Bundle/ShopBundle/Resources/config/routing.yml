@@ -3,11 +3,13 @@ aca_shop_homepage:
     defaults: { _controller: AcaShopBundle:Default:index }
 
 aca_login_route:
+    #this represents the URL
     path: /login_form
-    #the path here is representative of the BundleFolder:ControllerName("Controller" is assumed):FunctionName("Action" is assumed)
+    #this represents the BundleFolder:ControllerName("Controller" is assumed):FunctionName("Action" is assumed)
     defaults: {_controller: AcaShopBundle:Default:loginForm }
 
 aca_process_login_route:
+    #this represents the URL
     path: /process_login
-    #the path here is representative of the BundleFolder:ControllerName("Controller" is assumed):FunctionName("Action" is assumed)
+    #this represents the BundleFolder:ControllerName("Controller" is assumed):FunctionName("Action" is assumed)
     defaults: {_controller: AcaShopBundle:Default:processLogin }
