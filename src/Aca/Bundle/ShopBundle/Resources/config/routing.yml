@@ -13,3 +13,11 @@ aca_process_login_route:
     path: /process_login
     #this represents the BundleFolder:ControllerName("Controller" is assumed):FunctionName("Action" is assumed)
     defaults: {_controller: AcaShopBundle:Default:processLogin }
+
+aca_in_class_login_route:
+    path: /login_form2
+    defaults: {_controller: AcaShopBundle:Login:loginForm }
+
+aca_in_class_logout_route:
+    path: /logout
+    defaults: {_controller: AcaShopBundle:Login:logout }

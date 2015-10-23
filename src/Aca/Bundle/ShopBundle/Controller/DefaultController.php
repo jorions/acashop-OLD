@@ -26,10 +26,10 @@ class DefaultController extends Controller
     {
         // Pull the information out of the form (get can take information from different sources, including forms)
         $username = $req->get('username');
-        echo 'Username entered: ' . $username . '<br />';
+        //echo 'Username entered: ' . $username . '<br />';
 
         $password = $req->get('password');
-        echo 'Password entered: ' . $password . '<br /><br />';
+        //echo 'Password entered: ' . $password . '<br /><br />';
 
         // Error handling for if the username or password is blank
         if($username == "") {
