@@ -4,10 +4,13 @@ namespace Aca\Bundle\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-// Use this for the processLoginAction
+// Use this for logoutAction
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+// Use this for loginFormAction
 use Symfony\Component\HttpFoundation\Request;
 
-// Use this for DB Homework
+// Use this for Database object
 use Aca\Bundle\ShopBundle\Db\Database;
 
 class LoginController extends Controller {
@@ -31,7 +34,7 @@ class LoginController extends Controller {
 
             $query = "
             SELECT
-                user_id
+                *
             FROM
                 aca_user
             WHERE

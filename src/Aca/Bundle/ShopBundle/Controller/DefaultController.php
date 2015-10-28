@@ -55,7 +55,7 @@ class DefaultController extends Controller
         // Set up a query to check against the DB
         $query = "
         SELECT
-            user_id
+            *
         FROM
             aca_user
         WHERE
