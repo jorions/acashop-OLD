@@ -117,6 +117,148 @@ class LoginController extends Controller {
         $session->save();
 
         // This is another type of response object
-        return new RedirectResponse('/login_form');
+        return new RedirectResponse('/');
+    }
+
+    /**
+     * Account registration
+     * @param Request $req
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registrationAction(Request $req) {
+
+        // Get or start a session
+        $session = $this->getSession();
+
+        // Set variables to check for form entry
+        // Check for logged in first so we don't reset credentials
+        if($session->get('loggedIn') != true) {
+            $name = $req->get('name');
+            $username = $req->get('username');
+            $password = $req->get('password');
+            $loggedIn = false;
+
+        // If already logged on just render page
+        } else {
+            return $this->render(
+                'AcaShopBundle:LoginForm:registration.html.twig',
+                array(
+                    'loggedIn' => $session->get('loggedIn'),
+                    'name' => $session->get('name'),
+                    'msg' => $session->get('msg'),
+                    'username' => $session->get('username'),
+                    'password' => $session->get('password')
+                )
+            );
+        }
+
+        // Check for form entry
+        if (!empty($username) && !empty($password) && !empty($name) && $req->getMethod() == 'POST' && $loggedIn != true) {
+
+            // Prevent MySQL injection - if anything uses illegal characters, tell user
+            if(!preg_match("#^[a-zA-Z0-9]+$#", $username) || !preg_match("#^[a-zA-Z0-9]+$#", $password) || !preg_match("#^[a-zA-Z0-9]+$#", $name)) {
+
+                $msg = 'Make sure everything contains only numbers and letters';
+                $session->set('msg', $msg);
+                $session->set('loggedIn', false);
+
+                $session->save();
+
+                $loggedIn = $session->get('loggedIn');
+                $msg = $session->get('msg');
+
+                // Return the rendered twig
+                return $this->render(
+                    'AcaShopBundle:LoginForm:registration.html.twig',
+                    array(
+                        'loggedIn' => $loggedIn,
+                        'name' => $name,
+                        'msg' => $msg,
+                        'username' => $username,
+                        'password' => $password
+                    )
+                );
+            }
+
+            // Now that we know there is no MySQL injection, query DB
+            $query = "
+            SELECT
+                *
+            FROM
+                aca_user
+            WHERE
+                username='$username'";
+
+            $db = new Database();
+
+            $data = $db->fetchRows($query);
+
+            // Login already exists
+            if ($data->num_rows> 0 && $req->getMethod() == 'POST') {
+
+                $msg = 'That username already exists - please try another';
+                $session->set('msg', $msg);
+                $session->set('loggedIn', false);
+
+            // Login does not exist
+            } else {
+
+                // Create new user
+                $db->insertNewUser($username, $password, $name);
+
+                // Set session values
+                $session->set('loggedIn', true);
+                $session->set('name', $name);
+                $session->set('username', $username);
+                $session->set('password', $password);
+
+                // Before you can run any operations on $session you have to save it
+                $session->save();
+
+                // Set render array variables now that user credentials have been created
+                $loggedIn = $session->get('loggedIn');
+                $name = $req->get('name');
+                $msg = $session->get('msg');
+                $username = $req->get('username');
+                $password = $req->get('password');
+
+                // Return the rendered twig
+                return $this->render(
+                    'AcaShopBundle:LoginForm:login.html.twig',
+                    array(
+                        'loggedIn' => $loggedIn,
+                        'name' => $name,
+                        'msg' => $msg,
+                        'username' => $username,
+                        'password' => $password
+                    )
+                );
+            }
+
+        // Form entry error
+        } else if($loggedIn != true) {
+            $msg = 'Please make sure you have entered information in all fields';
+            $session->set('msg', $msg);
+            $session->set('loggedIn', false);
+        }
+
+        // Before you can run any operations on $session you have to save it
+        $session->save();
+
+        // Set render array variables now that user credentials have been created
+        $loggedIn = $session->get('loggedIn');
+        $msg = $session->get('msg');
+
+        // Return the rendered twig
+        return $this->render(
+            'AcaShopBundle:LoginForm:registration.html.twig',
+            array(
+                'loggedIn' => $loggedIn,
+                'name' => $name,
+                'msg' => $msg,
+                'username' => $username,
+                'password' => $password
+            )
+        );
     }
 }

@@ -19,3 +19,68 @@ body {
 footer {
     margin: 50px 0;
 }
+
+
+/* ########################################################################################################################
+   ################################################### Custom CSS #########################################################
+   ######################################################################################################################## */
+
+.hero-spacer-centered {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.login-form {
+    width: 200px;
+    margin: auto;
+    text-align: center;
+    height: 230px;
+}
+
+.login-form form {
+    width: 200px;
+    margin: auto;
+    display: inline-block;
+}
+
+.login-form input[type=submit] {
+    width: 150px;
+}
+
+.centering {
+    margin: auto;
+    display: inline-block;
+    width: 100%;
+}
+
+.btn-reverse-colors {
+    background: white;
+    color: #337ab7;
+}
+
+.error {
+    text-align: center;
+    color: #337ab7;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.product-custom {
+    max-height: 400px;
+    min-height: 400px;
+}
+
+.thumbnail-custom {
+    height: 400px;
+}
+
+.thumbnail-custom img {
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.caption-custom {
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}

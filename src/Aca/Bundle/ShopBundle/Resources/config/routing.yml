@@ -14,9 +14,6 @@ aca_process_login_route:
     #this represents the BundleFolder:ControllerName("Controller" is assumed):MethodName("Action" is assumed)
     defaults: {_controller: AcaShopBundle:Default:processLogin }
 
-
-
-
 # Login Forms Created In-Class
 aca_login_route:
     path: /login_form
@@ -24,14 +21,27 @@ aca_login_route:
     # This indicates the HTTP verbs ("types of action against the endpoint") that the routing path (or is it controller??) can use
     methods: [GET, POST]
 
-aca_logout_route:
-    path: /logout
-    defaults: {_controller: AcaShopBundle:Login:logout }
-    methods: [POST]
+
 
 
 
 # Route for index
-aca_shop_homepage:
+aca_shop_homepage_route:
     path: /
-    defaults: {_controller: AcaShopBundle:Default:index }
+#   defaults: {_controller: AcaShopBundle:Default:index }
+    defaults: {_controller: AcaShopBundle:Login:loginForm }
+    methods: [GET, POST]
+
+aca_logout_route:
+    path: /logout
+    defaults: {_controller: AcaShopBundle:Login:logout }
+    methods: [GET, POST]
+
+aca_registration_route:
+    path: /registration
+    defaults: {_controller: AcaShopBundle:Login:registration }
+    methods: [GET, POST]
+
+aca_products_route:
+    path: /products
+    defaults: {_controller: AcaShopBundle:Products:viewAll }

@@ -90,4 +90,18 @@ class Database
         }
         return $return;
     }
+
+    /**
+     * Insert new user into DB
+     * @param $username
+     * @param $password
+     * @param $name
+     * @return void
+     */
+    public function insertNewUser($username, $password, $name) {
+        $insert = $this->db->prepare("INSERT INTO aca_user (username, password, name) VALUES (?,?,?)");
+        $insert->bind_param("sss", $username, $password, $name);
+        $insert->execute();
+    }
+
 }

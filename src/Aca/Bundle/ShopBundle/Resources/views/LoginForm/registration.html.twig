@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+    {% if loggedIn %}
+
+        <header class="jumbotron hero-spacer-centered">
+            <h1>You're already registered {{ name }}</h1>
+        </header>
+
+        <form action="/logout" method="POST">
+            <input class="btn btn-primary" type="submit" value="Logout" />
+        </form>
+
+    {% else %}
+
+        <header class="jumbotron hero-spacer-centered">
+            <h1>Account Registration</h1>
+        </header>
+
+
+        <div class="col-md-3 col-sm-6 hero-feature centering">
+            <div class="thumbnail login-form">
+                <form action="/registration" method="POST">
+
+                    Username:
+                    <br />
+                    <input type="text" name="username" value="{{ username }}" />
+                    <br />
+                    Password:
+                    <br />
+                    <input type="password" name="password" value="{{ password }}" />
+                    <br />
+                    Name:
+                    <br />
+                    <input type="text" name="name" value="{{ name }}" />
+
+                    <br />
+                    <br />
+
+                    <input class="btn btn-primary" type="submit" value="Create" />
+                </form>
+            </div>
+        </div>
+
+        {% if msg %}
+            <div class="error">{{ msg }}</div>
+        {% endif %}
+
+    {% endif %}
+{% endblock content %}
