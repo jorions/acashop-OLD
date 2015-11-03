@@ -45,3 +45,7 @@ aca_registration_route:
 aca_products_route:
     path: /products
     defaults: {_controller: AcaShopBundle:Products:viewAll }
+
+aca_product_page_route:
+    path: /products/{id}
+    defaults: {_controller: AcaShopBundle:Products:viewProduct }
