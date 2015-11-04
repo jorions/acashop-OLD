@@ -45,7 +45,11 @@ aca_registration_route:
 aca_products_route:
     path: /products
     defaults: {_controller: AcaShopBundle:Products:viewAll }
+    # Set to GET to prevent users from injecting POSTs into the URL to try to break the site
+    # This is best practice for content pages that aren't really receiving a GET or POST
+    methods: [GET]
 
 aca_product_page_route:
-    path: /products/{id}
+    path: /products/{slug}
     defaults: {_controller: AcaShopBundle:Products:viewProduct }
+    methods: [GET]

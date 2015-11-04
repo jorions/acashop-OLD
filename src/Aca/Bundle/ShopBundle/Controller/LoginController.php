@@ -46,7 +46,7 @@ class LoginController extends Controller {
             $data = $db->fetchRowMany($query);
 
             // Invalid login (check for empty username and password)
-            if (empty($data) && $req->getMethod() == 'POST') {
+            if (empty($data)) {
 
                 $msg = 'Please check your credentials';
                 $session->set('loggedIn', false);

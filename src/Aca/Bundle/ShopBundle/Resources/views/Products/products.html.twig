@@ -1,7 +1,37 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    <title>All Products</title>
+{% endblock title %}
+
 {% block content %}
 
-    {{ output | raw }}
+    <header class="jumbotron hero-spacer-centered">
+        <h1>All Products</h1>
+    </header>
+
+    <div class="row text-center">
+
+
+    {% for item in products %}
+
+        <div class="col-md-3 col-sm-6 hero-feature product-custom">
+            <div class="thumbnail thumbnail-custom">
+                <div class="caption caption-static-size">
+                    <h4>{{ item.name }}</h4>
+                </div>
+                <img src="{{ item.image }}" alt="">
+                <div class="caption caption-custom">
+                    <h3>${{ item.price }}</h3>
+                    <p class="">
+                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="/products/{{ item.slug }}" class="btn btn-default">More Info</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
 
 {% endblock content %}

@@ -10,6 +10,8 @@ use Aca\Bundle\ShopBundle\Db\Database;
 // Use this for Login objects
 use Aca\Bundle\ShopBundle\Controller\LoginController;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class ProductsController extends Controller {
 
@@ -53,110 +55,56 @@ class ProductsController extends Controller {
 
         $db = new Database();
 
-        // Product page headline and opening div for page
-        $output =
-            '<!-- Jumbotron Header -->
-            <header class="jumbotron hero-spacer-centered">
-                <h1>All Products</h1>
-            </header>
-            <div class="row text-center">';
-
+        // DB query
         $query = "SELECT * FROM aca_product";
 
         // Query DB to get all items from aca_product
         $data = $db->fetchRowMany($query);
 
-        // Iterate through returned array and add HTML-formatted output to array for return
-        foreach($data as $item) {
-            $allItems[] =
-                '<div class="col-md-3 col-sm-6 hero-feature product-custom">
-                    <div class="thumbnail thumbnail-custom">
-                        <div class="caption">
-                            <h4>' . $item['name'] . '</h4>
-                        </div>
-                        <img src="' . $item['image'] . '" alt="">
-                        <div class="caption caption-custom">
-                            <h3>$' . $item['price'] . '</h3>
-                            <p class="">
-                                <a href="#" class="btn btn-primary">Buy Now!</a> <a href="/products/' . $item['product_id'] . '" class="btn btn-default">More Info</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>';
-        }
-
-        // product_id
-        // name
-        // description
-        // image
-        // category
-        // price
-        // date_added
-
-        // Iterate through new array of all HTML-formatted products and add to output string
-        // ???WHY CAN'T I JUST DO THIS ABOVE???
-        foreach($allItems as $item) {
-            $output .= $item;
-        }
-
-        // Close opening div
-        $output .= "</div>";
-
         return $this->render(
             'AcaShopBundle:Products:products.html.twig',
             array(
-                'output' => $output
+                'products' => $data
             )
         );
     }
 
     /**
      * Show individual product page
-     * @param $id
+     * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewProductAction($id) {
+    public function viewProductAction($slug) {
 
         $db = new Database();
 
-        $query = "SELECT * FROM aca_product WHERE product_id = $id";
+        $query = "SELECT * FROM aca_product WHERE slug = '$slug'";
 
         $data = $db->fetchRowMany($query);
 
         // Make sure item exists
         if(count($data) > 0) {
 
+            // Set $data to be the first index of the array so that the properties (name, image, etc) can be directly referenced in the twig
+            $data = $data[0];
+
             // HTML-formatted product page
-            $output =
-                '<div class="row">
-                    <div class="col-md-9">
-                        <div class="thumbnail">
-                            <img class="img-responsive" src="' . $data[0]['image'] . '" alt="" />
-                            <div class="caption-full">
-                                <h4 class="pull-right">' . $data[0]['price'] . '</h4>
-                                <h4><a href="#">' . $data[0]['name'] . '</a></h4>
-                                <p>' . $data[0]['description'] . '</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>';
+            return $this->render(
+                'AcaShopBundle:Products:product.page.html.twig',
+                array(
+                    'product' => $data,
+                    'error' => false
+                )
+            );
 
         } else {
 
-            // HTML-formatted error
-            $output = '<!-- Jumbotron Header -->
-            <header class="jumbotron hero-spacer-centered">
-                <h1>Oh no! That product doesn\'t exist!</h1>
-            </header>';
+            return $this->render(
+                'AcaShopBundle:Products:product.page.html.twig',
+                array(
+                    'error' => true
+                )
+            );
         }
-
-        return $this->render(
-            'AcaShopBundle:Products:products.html.twig',
-            array(
-                'output' => $output
-            )
-        );
-
     }
 }

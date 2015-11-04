@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {% if error %}
+        <title>No Product</title>
+    {% else %}
+        <title>{{ product.name }}</title>
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+    {% if error %}
+        <header class="jumbotron hero-spacer-centered">
+            <h1>Oh no! That product doesn't exist!</h1>
+        </header>
+    {% else %}
+        <div class="row">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <img class="img-responsive img-static-size" src="{{ product.image }}" alt="" />
+                    <div class="caption-full">
+                        <h4 class="pull-right">{{ product.price }}</h4>
+                        <h4><a href="#">{{ product.name }}</a></h4>
+                        <p>{{ product.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
