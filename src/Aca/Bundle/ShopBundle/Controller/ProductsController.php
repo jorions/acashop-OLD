@@ -53,7 +53,11 @@ class ProductsController extends Controller {
             )
         );*/
 
-        $db = new Database();
+        // OLD METHOD WITHOUT SERVICE
+        //$db = new Database();
+
+        // NEW METHOD USING SERVICE
+        $db = $this->get('acadb');
 
         // DB query
         $query = "SELECT * FROM aca_product";
@@ -76,17 +80,25 @@ class ProductsController extends Controller {
      */
     public function viewProductAction($slug) {
 
-        $db = new Database();
+        // OLD METHOD WITHOUT SERVICE
+        //$db = new Database();
 
-        $query = "SELECT * FROM aca_product WHERE slug = '$slug'";
+        // NEW METHOD USING SERVICE
+        $db = $this->get('acadb');
 
-        $data = $db->fetchRowMany($query);
+        $query =
+            "SELECT
+              *
+            FROM
+              aca_product
+            WHERE slug = :myslug";
+
+        // The new acadb object has a method called fetchRow which takes a query as the first parameter and then an associative array
+        // where you define the variable terms in the given $query
+        $data = $db->fetchRow($query, array('mySlug' => $slug));
 
         // Make sure item exists
         if(count($data) > 0) {
-
-            // Set $data to be the first index of the array so that the properties (name, image, etc) can be directly referenced in the twig
-            $data = $data[0];
 
             // HTML-formatted product page
             return $this->render(
