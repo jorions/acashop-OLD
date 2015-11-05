@@ -24,7 +24,6 @@ class LoginController extends Controller {
     {
         $msg = null;
 
-
         // Sets the $session variable by getting the session
         $session = $this->getSession();
         $username = $req->get('username');
@@ -41,7 +40,7 @@ class LoginController extends Controller {
                 username='$username'
                 and password='$password'";
 
-            $db = new Database();
+            $db = $this->get('acadb');
 
             $data = $db->fetchRowMany($query);
 
@@ -189,12 +188,12 @@ class LoginController extends Controller {
             WHERE
                 username='$username'";
 
-            $db = new Database();
+            $db = $this->get('acadb');
 
-            $data = $db->fetchRows($query);
+            $data = $db->fetchRow($query);
 
             // Login already exists
-            if ($data->num_rows> 0 && $req->getMethod() == 'POST') {
+            if (count($data) > 0 && $req->getMethod() == 'POST') {
 
                 $msg = 'That username already exists - please try another';
                 $session->set('msg', $msg);
@@ -204,7 +203,9 @@ class LoginController extends Controller {
             } else {
 
                 // Create new user
-                $db->insertNewUser($username, $password, $name);
+                //$db->insertNewUser($username, $password, $name);
+
+                $db->insert('aca_user', array('name' => $name, 'username' => $username, 'password' => $password));
 
                 // Set session values
                 $session->set('loggedIn', true);

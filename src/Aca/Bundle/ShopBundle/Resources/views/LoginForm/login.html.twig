@@ -15,42 +15,41 @@
 
     {% else %}
 
-    <header class="jumbotron hero-spacer-centered">
-        <h1>Account Login</h1>
-    </header>
+        <header class="jumbotron hero-spacer-centered">
+            <h1>Account Login</h1>
+        </header>
 
+        <div class="col-md-3 col-sm-6 hero-feature centering">
+            <div class="thumbnail login-form">
+                <form action="/" method="POST">
 
-    <div class="col-md-3 col-sm-6 hero-feature centering">
-        <div class="thumbnail login-form">
-            <form action="/" method="POST">
+                    Username:
+                    <br />
+                    <input type="text" name="username" value="{{ username }}"/>
+                    <br />
+                    Password:
+                    <br />
+                    <input type="password" name="password" value="{{ password }}"/>
 
-                Username:
+                    <br />
+                    <br />
+
+                    <input class="btn btn-primary" type="submit" value="Login" />
+                </form>
+
                 <br />
-                <input type="text" name="username" value="{{ username }}"/>
-                <br />
-                Password:
-                <br />
-                <input type="password" name="password" value="{{ password }}"/>
-
-                <br />
                 <br />
 
-                <input class="btn btn-primary" type="submit" value="Login" />
-            </form>
+                <form action="/registration" method="POST">
+                    <input class="btn btn-primary btn-reverse-colors" type="submit" value="Sign Up" />
+                </form>
 
-            <br />
-            <br />
-
-            <form action="/registration" method="POST">
-                <input class="btn btn-primary btn-reverse-colors" type="submit" value="Sign Up" />
-            </form>
-
+            </div>
         </div>
-    </div>
 
-    {% if msg %}
-        <div class="error">{{ msg }}</div>
-    {% endif %}
+        {% if msg %}
+            <div class="error">{{ msg }}</div>
+        {% endif %}
 
     {% endif %}
 {% endblock content %}
