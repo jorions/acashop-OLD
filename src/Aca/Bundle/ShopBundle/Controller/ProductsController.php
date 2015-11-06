@@ -4,9 +4,6 @@ namespace Aca\Bundle\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-// Use this for Database object
-use Aca\Bundle\ShopBundle\Db\Database;
-
 // Use this for Login objects
 use Aca\Bundle\ShopBundle\Controller\LoginController;
 
@@ -86,21 +83,22 @@ class ProductsController extends Controller {
         // NEW METHOD USING SERVICE
         $db = $this->get('acadb');
 
-        $query =
-            "SELECT
+        $query = "
+            SELECT
               *
             FROM
               aca_product
-            WHERE slug = :myslug";
+            WHERE
+              slug = :myslug";
 
         // The new acadb object has a method called fetchRow which takes a query as the first parameter and then an associative array
         // where you define the variable terms in the given $query
-        $data = $db->fetchRow($query, array('mySlug' => $slug));
+        $data = $db->fetchRow($query, array('myslug' => $slug));
 
         // Make sure item exists
         if(count($data) > 0) {
 
-            // HTML-formatted product page
+            // Product page
             return $this->render(
                 'AcaShopBundle:Products:product.page.html.twig',
                 array(

@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4795a69e-5fb0-4126-80d0-cdced135aa40" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/CartController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/CartService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Cart/show.cart.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Default/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/public/css/heroic-features.css" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/public/css/heroic-features.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/nav.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/nav.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="acashop.iws" />
@@ -27,25 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Database.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Db/Database.php">
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.25">
-              <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
-              <folding>
-                <element signature="e#333#345#0#PHP" expanded="true" />
-                <marker date="1446427305000" expanded="true" signature="2358:2370" placeholder="INSERT INTO ..." />
-                <marker date="1446427305000" expanded="true" signature="2358:2420" placeholder="INSERT INTO ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Default/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75">
-              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <state vertical-scroll-proportion="-25.777779">
+              <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -54,17 +49,72 @@
       <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125">
-              <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+            <state vertical-scroll-proportion="-11.0">
+              <caret line="207" column="114" selection-start-line="207" selection-start-column="17" selection-end-line="207" selection-end-column="114" />
               <folding>
                 <element signature="e#52#109#0#PHP" expanded="true" />
                 <element signature="e#2300#2341#0#PHP" expanded="true" />
                 <element signature="e#3938#3986#0#PHP" expanded="true" />
                 <element signature="e#5149#5197#0#PHP" expanded="true" />
                 <element signature="e#7174#7215#0#PHP" expanded="true" />
-                <element signature="e#8121#8169#0#PHP" expanded="true" />
-                <marker date="1446711895000" expanded="true" signature="873:1035" placeholder="SELECT * FRO..aca_user..." />
-                <marker date="1446711895000" expanded="true" signature="5613:5734" placeholder="SELECT * FRO..aca_user..." />
+                <element signature="e#8169#8217#0#PHP" expanded="true" />
+                <marker date="1446776963000" expanded="true" signature="873:1035" placeholder="SELECT * FRO..aca_user..." />
+                <marker date="1446776963000" expanded="true" signature="5613:5734" placeholder="SELECT * FRO..aca_user..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Database.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Db/Database.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-41.875">
+              <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+              <folding>
+                <element signature="e#333#345#0#PHP" expanded="true" />
+                <marker date="1446427305000" expanded="true" signature="2358:2420" placeholder="INSERT INTO ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-33.75">
+              <caret line="86" column="12" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="12" />
+              <folding>
+                <element signature="e#52#109#0#PHP" expanded="true" />
+                <element signature="e#1650#1693#0#PHP" expanded="true" />
+                <element signature="e#2660#2707#0#PHP" expanded="true" />
+                <element signature="e#2911#2958#0#PHP" expanded="true" />
+                <marker date="1446774037000" expanded="true" signature="1406:1607" placeholder="..." />
+                <marker date="1446774037000" expanded="true" signature="1481:1506" placeholder="SELECT * FRO..aca_product..." />
+                <marker date="1446774037000" expanded="true" signature="2134:2238" placeholder="SELECT * FRO..aca_product..." />
+                <marker date="1446774037000" expanded="true" signature="2134:2239" placeholder="SELECT * FRO..aca_product..." />
+                <marker date="1446774037000" expanded="true" signature="2134:2246" placeholder="SELECT * FRO..aca_product..." />
+                <marker date="1446774037000" expanded="true" signature="2134:2495" placeholder="SELECT * FRO..aca_product..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CartService.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/CartService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.09465021">
+              <caret line="57" column="52" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
+              <folding>
+                <element signature="e#49#73#0#PHP" expanded="true" />
+                <marker date="1446779515000" expanded="true" signature="1291:1398" placeholder="SELECT id FR..aca_user..." />
+                <marker date="1446779515000" expanded="true" signature="1291:1399" placeholder="SELECT id FR..aca_user..." />
+                <marker date="1446779515000" expanded="true" signature="1291:1400" placeholder="SELECT user_..aca_user..." />
+                <marker date="1446779515000" expanded="true" signature="1291:1410" placeholder="SELECT user_..aca_user..." />
+                <marker date="1446779515000" expanded="true" signature="1291:1496" placeholder="SELECT user_..aca_user..." />
+                <marker date="1446779515000" expanded="true" signature="1729:1854" placeholder="SELECT id FR..aca_cart..." />
+                <marker date="1446779515000" expanded="true" signature="1729:1855" placeholder="SELECT id FR..aca_cart..." />
+                <marker date="1446779515000" expanded="true" signature="1729:1856" placeholder="SELECT id FR..aca_cart..." />
+                <marker date="1446779515000" expanded="true" signature="1729:1865" placeholder="SELECT id FR..aca_cart..." />
               </folding>
             </state>
           </provider>
@@ -73,77 +123,10 @@
       <file leaf-file-name="Mysql.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/simplon/mysql/src/Mysql.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="374.0">
+            <state vertical-scroll-proportion="315.625">
               <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
               <folding>
                 <marker date="1446605631000" expanded="true" signature="19023:19066" placeholder="DELETE FROM ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="17" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductsController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77366257">
-              <caret line="93" column="33" selection-start-line="93" selection-start-column="33" selection-end-line="93" selection-end-column="33" />
-              <folding>
-                <element signature="e#52#109#0#PHP" expanded="true" />
-                <element signature="e#1722#1765#0#PHP" expanded="true" />
-                <element signature="e#2732#2779#0#PHP" expanded="true" />
-                <element signature="e#2983#3030#0#PHP" expanded="true" />
-                <marker date="1446607753000" expanded="true" signature="1478:1679" placeholder="..." />
-                <marker date="1446607753000" expanded="true" signature="1553:1578" placeholder="SELECT * FRO..aca_product..." />
-                <marker date="1446607753000" expanded="true" signature="2205:2295" placeholder="SELECT * FRO..aca_product..." />
-                <marker date="1446607753000" expanded="true" signature="2205:2296" placeholder="SELECT * FRO..aca_product..." />
-                <marker date="1446607753000" expanded="true" signature="2205:2303" placeholder="SELECT * FRO..aca_product..." />
-                <marker date="1446607753000" expanded="true" signature="2205:2552" placeholder="SELECT * FRO..aca_product..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.0">
-              <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-              <folding>
-                <element signature="e#12#28#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-              <folding>
-                <element signature="e#909#924#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="registration.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.5">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="47" selection-end-column="19" />
-              <folding>
-                <element signature="e#12#28#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,8 +136,45 @@
         <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="72" selection-start-line="5" selection-start-column="72" selection-end-line="5" selection-end-column="72" />
+              <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CartController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/CartController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.0">
+              <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+              <folding>
+                <element signature="e#52#97#0#PHP" expanded="true" />
+                <element signature="e#284#324#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product.page.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.625">
+              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+              <folding>
+                <element signature="e#12#28#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-22.5">
+              <caret line="36" column="81" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="81" />
+              <folding>
+                <element signature="e#12#28#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -177,21 +197,25 @@
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/web/bundles/acashopbundle/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Db/Database.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/nav.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig" />
-        <option value="$PROJECT_DIR$/web/bundles/acashopbundle/css/heroic-features.css" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/products.html.twig" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Default/index.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/web/bundles/acashopbundle/css/heroic-features.css" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Cart/show.cart.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/nav.html.twig" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Services/CartService.php" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/CartController.php" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/CartService.php" />
       </list>
     </option>
   </component>
@@ -455,6 +479,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="acashop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="acashop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Aca" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShopBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -574,6 +628,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="acashop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="acashop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Aca" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShopBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cart" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -899,7 +991,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446608345327</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Finished database service&#10;&#10;Still need to figure out why login button clicks don't work after form is filled out and registration clicks don't work immediately">
+      <created>1446712202819</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1446712202819</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -949,7 +1047,8 @@
     <MESSAGE value="Added comments&#10;&#10;Added basic individual product page view" />
     <MESSAGE value="Updated product page rendering process to format through twig&#10;&#10;Updated slug to be search-engine friendly by not relying on an ID #" />
     <MESSAGE value="Added simplon/mysql service&#10;&#10;Implemented service in ProductsController&#10;&#10;Yet to be implemented in LoginController" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added simplon/mysql service&#10;&#10;Implemented service in ProductsController&#10;&#10;Yet to be implemented in LoginController" />
+    <MESSAGE value="Finished database service&#10;&#10;Still need to figure out why login button clicks don't work after form is filled out and registration clicks don't work immediately" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished database service&#10;&#10;Still need to figure out why login button clicks don't work after form is filled out and registration clicks don't work immediately" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1002,9 +1101,9 @@
             <element signature="e#3938#3986#0#PHP" expanded="true" />
             <element signature="e#5149#5197#0#PHP" expanded="true" />
             <element signature="e#7174#7215#0#PHP" expanded="true" />
-            <element signature="e#8121#8169#0#PHP" expanded="true" />
-            <marker date="1446711895000" expanded="true" signature="873:1035" placeholder="SELECT * FRO..aca_user..." />
-            <marker date="1446711895000" expanded="true" signature="5613:5734" placeholder="SELECT * FRO..aca_user..." />
+            <element signature="e#8169#8217#0#PHP" expanded="true" />
+            <marker date="1446776963000" expanded="true" signature="873:1035" placeholder="SELECT * FRO..aca_user..." />
+            <marker date="1446776963000" expanded="true" signature="5613:5734" placeholder="SELECT * FRO..aca_user..." />
           </folding>
         </state>
       </provider>
@@ -1116,14 +1215,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34430727">
-          <caret line="752" column="20" selection-start-line="752" selection-start-column="20" selection-end-line="752" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/acashopbundle/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.851852">
@@ -1157,54 +1248,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/nav.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.75">
-          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/acashopbundle/css/heroic-features.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/products.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.625">
-          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
-          <folding>
-            <element signature="e#12#28#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.75">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding>
-            <element signature="e#12#28#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1217,56 +1264,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="72" selection-start-line="5" selection-start-column="72" selection-end-line="5" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Db/Database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.25">
-          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
-          <folding>
-            <element signature="e#333#345#0#PHP" expanded="true" />
-            <marker date="1446427305000" expanded="true" signature="2358:2370" placeholder="INSERT INTO ..." />
-            <marker date="1446427305000" expanded="true" signature="2358:2420" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.5">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="47" selection-end-column="19" />
-          <folding>
-            <element signature="e#12#28#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding>
-            <element signature="e#909#924#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.0">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-          <folding>
-            <element signature="e#12#28#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.75">
@@ -1275,26 +1272,128 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php">
+    <entry file="file://$PROJECT_DIR$/web/bundles/acashopbundle/css/heroic-features.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.125">
-          <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.375">
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
           <folding>
-            <element signature="e#52#109#0#PHP" expanded="true" />
-            <element signature="e#2300#2341#0#PHP" expanded="true" />
-            <element signature="e#3938#3986#0#PHP" expanded="true" />
-            <element signature="e#5149#5197#0#PHP" expanded="true" />
-            <element signature="e#7174#7215#0#PHP" expanded="true" />
-            <element signature="e#8121#8169#0#PHP" expanded="true" />
-            <marker date="1446711895000" expanded="true" signature="873:1035" placeholder="SELECT * FRO..aca_user..." />
-            <marker date="1446711895000" expanded="true" signature="5613:5734" placeholder="SELECT * FRO..aca_user..." />
+            <element signature="e#909#924#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.375">
+          <caret line="40" column="77" selection-start-line="40" selection-start-column="77" selection-end-line="40" selection-end-column="77" />
+          <folding>
+            <element signature="e#12#28#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/nav.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.75">
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34430727">
+          <caret line="722" column="20" selection-start-line="722" selection-start-column="20" selection-end-line="722" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/products.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5144033">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+          <folding>
+            <element signature="e#12#28#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Cart/show.cart.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.125">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="e#12#28#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.5">
+          <caret line="36" column="81" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="81" />
+          <folding>
+            <element signature="e#12#28#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Products/product.page.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.625">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding>
+            <element signature="e#12#28#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17928287">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07968128">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.777779">
+          <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Db/Database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-41.875">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+          <folding>
+            <element signature="e#333#345#0#PHP" expanded="true" />
+            <marker date="1446427305000" expanded="true" signature="2358:2420" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/simplon/mysql/src/Mysql.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="374.0">
+        <state vertical-scroll-proportion="315.625">
           <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
           <folding>
             <marker date="1446605631000" expanded="true" signature="19023:19066" placeholder="DELETE FROM ..." />
@@ -1302,29 +1401,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml">
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="17" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77366257">
-          <caret line="93" column="33" selection-start-line="93" selection-start-column="33" selection-end-line="93" selection-end-column="33" />
+        <state vertical-scroll-proportion="-33.75">
+          <caret line="86" column="12" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="12" />
           <folding>
             <element signature="e#52#109#0#PHP" expanded="true" />
-            <element signature="e#1722#1765#0#PHP" expanded="true" />
-            <element signature="e#2732#2779#0#PHP" expanded="true" />
-            <element signature="e#2983#3030#0#PHP" expanded="true" />
-            <marker date="1446607753000" expanded="true" signature="1478:1679" placeholder="..." />
-            <marker date="1446607753000" expanded="true" signature="1553:1578" placeholder="SELECT * FRO..aca_product..." />
-            <marker date="1446607753000" expanded="true" signature="2205:2295" placeholder="SELECT * FRO..aca_product..." />
-            <marker date="1446607753000" expanded="true" signature="2205:2296" placeholder="SELECT * FRO..aca_product..." />
-            <marker date="1446607753000" expanded="true" signature="2205:2303" placeholder="SELECT * FRO..aca_product..." />
-            <marker date="1446607753000" expanded="true" signature="2205:2552" placeholder="SELECT * FRO..aca_product..." />
+            <element signature="e#1650#1693#0#PHP" expanded="true" />
+            <element signature="e#2660#2707#0#PHP" expanded="true" />
+            <element signature="e#2911#2958#0#PHP" expanded="true" />
+            <marker date="1446774037000" expanded="true" signature="1406:1607" placeholder="..." />
+            <marker date="1446774037000" expanded="true" signature="1481:1506" placeholder="SELECT * FRO..aca_product..." />
+            <marker date="1446774037000" expanded="true" signature="2134:2238" placeholder="SELECT * FRO..aca_product..." />
+            <marker date="1446774037000" expanded="true" signature="2134:2239" placeholder="SELECT * FRO..aca_product..." />
+            <marker date="1446774037000" expanded="true" signature="2134:2246" placeholder="SELECT * FRO..aca_product..." />
+            <marker date="1446774037000" expanded="true" signature="2134:2495" placeholder="SELECT * FRO..aca_product..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/CartController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0">
+          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+          <folding>
+            <element signature="e#52#97#0#PHP" expanded="true" />
+            <element signature="e#284#324#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.0">
+          <caret line="207" column="114" selection-start-line="207" selection-start-column="17" selection-end-line="207" selection-end-column="114" />
+          <folding>
+            <element signature="e#52#109#0#PHP" expanded="true" />
+            <element signature="e#2300#2341#0#PHP" expanded="true" />
+            <element signature="e#3938#3986#0#PHP" expanded="true" />
+            <element signature="e#5149#5197#0#PHP" expanded="true" />
+            <element signature="e#7174#7215#0#PHP" expanded="true" />
+            <element signature="e#8169#8217#0#PHP" expanded="true" />
+            <marker date="1446776963000" expanded="true" signature="873:1035" placeholder="SELECT * FRO..aca_user..." />
+            <marker date="1446776963000" expanded="true" signature="5613:5734" placeholder="SELECT * FRO..aca_user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/CartService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09465021">
+          <caret line="57" column="52" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
+          <folding>
+            <element signature="e#49#73#0#PHP" expanded="true" />
+            <marker date="1446779515000" expanded="true" signature="1291:1398" placeholder="SELECT id FR..aca_user..." />
+            <marker date="1446779515000" expanded="true" signature="1291:1399" placeholder="SELECT id FR..aca_user..." />
+            <marker date="1446779515000" expanded="true" signature="1291:1400" placeholder="SELECT user_..aca_user..." />
+            <marker date="1446779515000" expanded="true" signature="1291:1410" placeholder="SELECT user_..aca_user..." />
+            <marker date="1446779515000" expanded="true" signature="1291:1496" placeholder="SELECT user_..aca_user..." />
+            <marker date="1446779515000" expanded="true" signature="1729:1854" placeholder="SELECT id FR..aca_cart..." />
+            <marker date="1446779515000" expanded="true" signature="1729:1855" placeholder="SELECT id FR..aca_cart..." />
+            <marker date="1446779515000" expanded="true" signature="1729:1856" placeholder="SELECT id FR..aca_cart..." />
+            <marker date="1446779515000" expanded="true" signature="1729:1865" placeholder="SELECT id FR..aca_cart..." />
           </folding>
         </state>
       </provider>

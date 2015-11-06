@@ -12,3 +12,8 @@ services:
     # the arguments are also in the Simplon literature (under "setup")
     # the arguments are being referred to and taken from the parameters.yml file
     arguments: [%database_host%, %database_user%, %database_password%, %database_name%]
+
+
+  cart:
+    class: Aca\Bundle\ShopBundle\Service\CartService
+    arguments: [@acadb, @session]

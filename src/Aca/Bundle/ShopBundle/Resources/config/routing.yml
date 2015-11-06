@@ -53,3 +53,13 @@ aca_product_page_route:
     path: /products/{slug}
     defaults: {_controller: AcaShopBundle:Products:viewProduct }
     methods: [GET]
+
+aca_cart_route:
+    path: /cart
+    defaults: {_controller: AcaShopBundle:Cart:showCart }
+    methods: [GET]
+
+aca_cart_add_route:
+    path: /cart
+    defaults: {_controller: AcaShopBundle:Cart:addCart }
+    methods: [POST]

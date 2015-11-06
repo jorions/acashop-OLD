@@ -236,6 +236,9 @@ class LoginController extends Controller {
                 );
             }
 
+
+        $buttonClicked = $req->get('create');
+
         // Form entry error
         } else if($loggedIn != true) {
             $msg = 'Please make sure you have entered information in all fields';
