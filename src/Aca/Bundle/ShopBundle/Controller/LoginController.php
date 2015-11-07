@@ -61,6 +61,7 @@ class LoginController extends Controller {
 
                 $session->set('loggedIn', true);
                 $session->set('name', $name);
+                $session->set('user_id', $row['user_id']);
             }
         }
 

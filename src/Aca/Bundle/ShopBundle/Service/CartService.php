@@ -55,23 +55,13 @@ class CartService
     public function getCartId()
     {
         // If the cart_id doesn't exist, create one
-        if($this->session->get('cart_id') == null) {
-
-            $username = $this->session->get('username');
-
-            $query = "
-                SELECT
-                  *
-                FROM
-                  aca_user
-                WHERE username = '$username'";
+        if($this->session->get('user_id') == null) {
 
             // Get current user ID
-            $data = $this->db->fetchRow($query);
-            $user_id = $data['user_id'];
+            $userId = $this->session->get('user_id');
 
             // Insert into table
-            $response = $this->db->insert('aca_cart', array('user_id' => $user_id));
+            $response = $this->db->insert('aca_cart', array('user_id' => $userId));
 
             // Get new cart_id
             $query = "
@@ -82,6 +72,7 @@ class CartService
                 WHERE
                   user_id = '$user_id'";
 
+            //
             $data = $this->db->fetchRow($query);
             $cart_id = $data['id'];
 
