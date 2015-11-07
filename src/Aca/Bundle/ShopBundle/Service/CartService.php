@@ -33,6 +33,45 @@ class CartService
         $this->session = $session;
     }
 
+
+    /**
+     * Create a cart record, and return the id if it doesn't exist
+     * If it does exist, just return the id
+     * @return int id
+     */
+    public function getCartId()
+    {
+        // Get current user ID
+        $userId = $this->session->get('user_id');
+
+        // Set cart ID query
+        $cartId = "
+            SELECT
+              id
+            FROM
+              aca_cart
+            WHERE
+              user_id = '$userId'";
+
+        // Query database
+        $data = $this->db->fetchRow($cartId);
+
+        // If the returned query is empty then there is no cart
+        if(empty($data)) {
+
+            // Insert method returns the last-inserted ID
+            // So this simultaneously inserts a new cart and sets $cartId = to the last-inserted ID
+            $cartId = $this->db->insert('aca_cart', array('user_id' => $userId));
+
+        } else {
+
+            $cartId = $data['id'];
+        }
+
+        return $cartId;
+    }
+
+
     /**
      * Add a product to the cart
      * @param int $productId
@@ -48,40 +87,19 @@ class CartService
     }
 
     /**
-     * Create a cart record, and return the id if it doesn't exist
-     * If it does exist, just return the id
-     * @return int id
+     * @param $productId
      */
-    public function getCartId()
+    public function removeProduct($productId)
     {
-        // If the cart_id doesn't exist, create one
-        if($this->session->get('user_id') == null) {
 
-            // Get current user ID
-            $userId = $this->session->get('user_id');
+    }
 
-            // Insert into table
-            $response = $this->db->insert('aca_cart', array('user_id' => $userId));
 
-            // Get new cart_id
-            $query = "
-                SELECT
-                  id
-                FROM
-                  aca_cart
-                WHERE
-                  user_id = '$user_id'";
+    /**
+     * @param $productId
+     */
+    public function updateProduct($productId)
+    {
 
-            //
-            $data = $this->db->fetchRow($query);
-            $cart_id = $data['id'];
-
-            // Set session variable to cart id
-            $this->session->set('cart_id', $cart_id);
-
-            return $cart_id;
-        }
-
-        return $this->session->get('cart_id');
     }
 }

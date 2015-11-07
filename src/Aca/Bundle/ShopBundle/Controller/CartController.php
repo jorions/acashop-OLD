@@ -23,6 +23,8 @@ class CartController extends Controller
         $quantity = $req->get('quantity');
 
         $cart->addProduct($productId, $quantity);
+
+        return $this->redirect('/');
     }
 
 }
