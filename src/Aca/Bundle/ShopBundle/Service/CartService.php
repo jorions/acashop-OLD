@@ -81,17 +81,32 @@ class CartService
     public function addProduct($productId, $quantity)
     {
 
-        // Insert item into aca_cart item table
-        $this->db->insert('aca_cart_item', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'quantity' => $quantity));
+        // Set query to get product price
+        $query = "
+            SELECT
+              price
+            FROM
+              aca_product
+            WHERE
+              id = '$productId'";
+
+        // Get price
+        $data = $this->db->fetchRow($query);
+        $price = $data['price'];
+
+        // Insert item into aca_cart_product table
+        $this->db->insert('aca_cart_product', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'price' => $price, 'quantity' => $quantity));
 
     }
 
     /**
+     * Remove a product from the cart
      * @param $productId
+     * @return bool
      */
     public function removeProduct($productId)
     {
-
+        $this->db->delete('aca_cart_product', array('product_id' => $productId));
     }
 
 
