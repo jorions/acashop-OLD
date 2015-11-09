@@ -54,12 +54,25 @@ aca_product_page_route:
     defaults: {_controller: AcaShopBundle:Products:viewProduct }
     methods: [GET]
 
+# When the page is visited via GET it is a link-based visit, so just showCart
 aca_cart_route:
     path: /cart
     defaults: {_controller: AcaShopBundle:Cart:showCart }
     methods: [GET]
 
+# When the page is visited via POST it is a form-based visit, so go to addCart first
 aca_cart_add_route:
     path: /cart
     defaults: {_controller: AcaShopBundle:Cart:addCart }
+    methods: [POST]
+
+aca_cart_update_route:
+    path: /updateCart
+    defaults: {_controller: AcaShopBundle:Cart:updateCart }
+    methods: [POST]
+
+# When the page is visited via POST it is a form-based visit, so go to addCart first
+aca_cart_remove_route:
+    path: /removeCart
+    defaults: {_controller: AcaShopBundle:Cart:removeCart }
     methods: [POST]

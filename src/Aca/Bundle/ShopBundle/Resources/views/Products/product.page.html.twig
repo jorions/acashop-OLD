@@ -16,32 +16,36 @@
     {% else %}
         <div class="row">
             <div class="col-md-9">
-                <div class="thumbnail">
-                    <img class="img-responsive img-static-size" src="{{ product.image }}" alt="" />
-                    <div class="caption-full">
-                        <h4 class="pull-right">{{ product.price }}</h4>
-                        <h4><a href="#">{{ product.name }}</a></h4>
-                        <p>{{ product.description }}</p>
-                    </div>
+                <h2 class="modified centered"><b>{{ product.name }}</b></h2>
+                <img class="img-responsive-custom" src="{{ product.image }}" alt="{{ product.name }}"/>
+                <div class="caption-full">
+                    <p>{{ product.description }}</p>
                 </div>
             </div>
         </div>
 
-        <form action="/cart" method="POST">
-            <input class="btn btn-primary" type="submit" name="addToCart" value="Add to Cart" />
-            <input type="hidden" name="product_id" value="{{ product.id }}" />
-            <select name="quantity">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </form>
+        <h3>${{ product.price|number_format(2, '.', ',') }}</h3>
+
+        {% if alreadyInCart %}
+            <form action="/updateCart" method="POST">
+                <input class="btn btn-primary" type="submit" name="updateCart" value="Update Cart" />
+        {% else %}
+            <form action="/cart" method="POST">
+                <input class="btn btn-primary" type="submit" name="addToCart" value="Add to Cart" />
+        {% endif %}
+                <input type="hidden" name="product_id" value="{{ product.id }}" />
+                <select name="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </form>
     {% endif %}
 {% endblock content %}

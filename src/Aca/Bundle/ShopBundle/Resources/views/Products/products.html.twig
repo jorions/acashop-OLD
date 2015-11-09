@@ -15,20 +15,17 @@
 
     {% for item in products %}
 
-        <div class="col-md-3 col-sm-6 hero-feature product-custom">
+        <a href="/products/{{ item.slug }}" class="col-md-3 col-sm-6 hero-feature product-custom">
             <div class="thumbnail thumbnail-custom">
                 <div class="caption caption-static-size">
-                    <h4>{{ item.name }}</h4>
+                    <h3 class="h3-modified">{{ item.name }}</h3>
                 </div>
                 <img src="{{ item.image }}" alt="">
                 <div class="caption caption-custom">
-                    <h3>${{ item.price }}</h3>
-                    <p class="">
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="/products/{{ item.slug }}" class="btn btn-default">More Info</a>
-                    </p>
+                    <h3 class="h3-modified"><b>${{ item.price|number_format(2, '.', ',') }}</b></h3>
                 </div>
             </div>
-        </div>
+        </a>
 
     {% endfor %}
 

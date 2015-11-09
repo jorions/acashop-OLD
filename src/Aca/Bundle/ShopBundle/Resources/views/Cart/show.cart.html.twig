@@ -1,6 +1,61 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    <title>Your Cart</title>
+{% endblock title %}
+
 {% block content %}
-    <h3>Shopping Cart</h3>
+    <header class="jumbotron hero-spacer-centered">
+        <h1>Your Cart</h1>
+    </header>
+
+    <!-- Set this outside the for loop so it is available to show outside the for loop -->
+    {% set totalPrice = 0 %}
+
+    <table class="cart">
+        {% for item in cart %}
+            <tr class="cart">
+                <td class="cart-name">{{ item.product_name }}</td>
+                <td class="cart-spacer"></td>
+                <td>${{ item.price|number_format(2, '.', ',') }}</td>
+                <td class="cart-spacer"></td>
+                <td>
+                    <form action="/updateCart" method="POST">
+                        <input type="hidden" name="product_id" value="{{ item.product_id }}" />
+                </td>
+                <td class="cart-spacer"></td>
+                <td>
+                        <select class="cart" name="quantity">
+                        {% for i in 1..10 %}
+                            <option value="{{ i }}"
+                            {% if i == item.quantity %}
+                                selected
+                            {% endif %}
+                            >{{ i }}
+                            </option>
+                        {% endfor %}
+                        </select>
+                </td>
+                <td class="cart-spacer"></td>
+                <td>
+                        <input class="btn btn-primary" type="submit" name="updateCart-{{ item.id }}" value="Update" />
+                    </form>
+                </td>
+                <td class="cart-spacer"></td>
+                <td>
+                    <form action="/removeCart" method="POST">
+                        <input type="hidden" name="product_id" value="{{ item.product_id }}" />
+                        <input class="btn btn-red-color" type="submit" name="removeCart-{{ item.id }}" value="Remove" />
+                    </form>
+                </td>
+            </tr>
+            {% set totalPrice = totalPrice + (item.quantity * item.price) %}
+        {% endfor %}
+        <tr>
+            <td class="cart-name-total">Total</td>
+            <td class="cart-spacer"></td>
+            <td class="cart-price-total">${{ totalPrice|number_format(2, '.', ',') }}</td>
+        </tr>
+    </table>
 
 {% endblock content %}

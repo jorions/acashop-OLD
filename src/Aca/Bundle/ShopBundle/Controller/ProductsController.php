@@ -77,11 +77,11 @@ class ProductsController extends Controller {
      */
     public function viewProductAction($slug) {
 
-        // OLD METHOD WITHOUT SERVICE
-        //$db = new Database();
-
         // NEW METHOD USING SERVICE
         $db = $this->get('acadb');
+        $cart = $this->get('cart');
+
+        $alreadyInCart = false;
 
         $query = "
             SELECT
@@ -98,12 +98,34 @@ class ProductsController extends Controller {
         // Make sure item exists
         if(count($data) > 0) {
 
+            // Set form function based on whether the item is already in the user's cart
+            // Setup query to check for product in user's cart
+            $query = "
+                SELECT
+                  product_id
+                FROM
+                  aca_cart_product
+                WHERE
+                  cart_id = :cartID";
+
+            // Query DB
+            $cartData = $db->fetchRowMany($query, array('cartID' => $cart->getCartId()));
+
+            if(count($cartData) > 0) {
+                foreach ($cartData as $id) {
+                    if ($id['product_id'] == $data['id']) {
+                        $alreadyInCart = true;
+                    }
+                }
+            }
+
             // Product page
             return $this->render(
                 'AcaShopBundle:Products:product.page.html.twig',
                 array(
                     'product' => $data,
-                    'error' => false
+                    'error' => false,
+                    'alreadyInCart' => $alreadyInCart
                 )
             );
 

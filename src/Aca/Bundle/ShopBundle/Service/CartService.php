@@ -24,13 +24,15 @@ class CartService
      * Unique cart id
      * @var int
      */
-    protected $cart_id;
+    protected $cartId;
 
     public function __construct(Mysql $db, Session $session)
     {
         $this->db = $db;
 
         $this->session = $session;
+
+        $this->cartId = $this->getCartId();
     }
 
 
@@ -73,6 +75,24 @@ class CartService
 
 
     /**
+     * Provide array of cart items
+     * @return array|null
+     */
+    public function getCart()
+    {
+
+        $query = "
+            SELECT
+              *
+            FROM
+              aca_cart_product
+            WHERE
+              cart_id = '$this->cartId'";
+
+        return $this->db->fetchRowMany($query);
+    }
+
+    /**
      * Add a product to the cart
      * @param int $productId
      * @param int $quantity
@@ -81,40 +101,46 @@ class CartService
     public function addProduct($productId, $quantity)
     {
 
-        // Set query to get product price
+        // Set query to get product info
         $query = "
             SELECT
-              price
+              *
             FROM
               aca_product
             WHERE
               id = '$productId'";
 
-        // Get price
+        // Set variables for insert statement
         $data = $this->db->fetchRow($query);
+        $name = $data['name'];
         $price = $data['price'];
 
         // Insert item into aca_cart_product table
-        $this->db->insert('aca_cart_product', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'price' => $price, 'quantity' => $quantity));
+        $this->db->insert('aca_cart_product', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'product_name' => $name, 'price' => $price, 'quantity' => $quantity));
 
     }
 
     /**
      * Remove a product from the cart
      * @param $productId
+     * @param $cartId
      * @return bool
      */
-    public function removeProduct($productId)
+    public function removeProduct($productId, $cartId)
     {
-        $this->db->delete('aca_cart_product', array('product_id' => $productId));
+        $this->db->delete('aca_cart_product', array('product_id' => $productId, 'cart_id' => $cartId));
     }
 
 
     /**
-     * @param $productId
+     * Update a product in the cart
+     * @param int $productId
+     * @param int $quantity
+     * @param int $cartId
+     * @return bool
      */
-    public function updateProduct($productId)
+    public function updateProduct($productId, $quantity, $cartId)
     {
-
+        $this->db->update('aca_cart_product', array('product_id' => $productId, 'cart_id' => $cartId), array('quantity' => $quantity));
     }
 }
