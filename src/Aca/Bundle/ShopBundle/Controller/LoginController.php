@@ -69,8 +69,8 @@ class LoginController extends Controller {
                 $cart->getCartId();
             }
 
-        // If the form isn't fully filled out
-        } else {
+        // If the form isn't fully filled out but has been submitted
+        } else if($req->getMethod() == 'POST') {
 
             $msg = 'Please make sure you enter a username and password';
         }
