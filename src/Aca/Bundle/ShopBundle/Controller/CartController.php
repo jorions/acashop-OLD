@@ -16,6 +16,7 @@ class CartController extends Controller
 
         $cart = $this->get('cart');
 
+        // Get array of cart contents
         $data = $cart->getCart();
 
         return $this->render(
@@ -35,11 +36,13 @@ class CartController extends Controller
     {
         $cart = $this->get('cart');
 
+        // Get order details from request
         $productId = $req->get('product_id');
         $quantity = $req->get('quantity');
 
         $cart->addProduct($productId, $quantity);
 
+        // Redirect to /cart, which as a GET will route to showCartAction()
         return $this->redirect('/cart');
     }
 
@@ -52,12 +55,15 @@ class CartController extends Controller
     {
         $cart = $this->get('cart');
 
+        // Get updated order details from request
+        // Get cart id
         $productId = $req->get('product_id');
         $quantity = $req->get('quantity');
         $cartId = $cart->getCartId();
 
         $cart->updateProduct($productId, $quantity, $cartId);
 
+        // Redirect to /cart, which as a GET will route to showCartAction()
         return $this->redirect('/cart');
     }
 
@@ -70,11 +76,14 @@ class CartController extends Controller
     {
         $cart = $this->get('cart');
 
+        // Get product to remove from request
+        // Get cart id
         $productId = $req->get('product_id');
         $cartId = $cart->getCartId();
 
         $cart->removeProduct($productId, $cartId);
 
+        // Redirect to /cart, which as a GET will route to showCartAction()
         return $this->redirect('/cart');
     }
 }

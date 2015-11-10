@@ -37,14 +37,14 @@ class LoginController extends Controller {
             FROM
                 aca_user
             WHERE
-                username='$username'
-                and password='$password'";
+                username= :username
+                and password= :password";
 
             $db = $this->get('acadb');
 
-            $data = $db->fetchRow($query);
+            $data = $db->fetchRow($query, array('username' => $username, 'password' => $password));
 
-            // Invalid login (check for empty username and password)
+            // Invalid login
             if (empty($data)) {
 
                 $msg = 'Please check your credentials';
@@ -68,6 +68,11 @@ class LoginController extends Controller {
                 $cart = $this->get('cart');
                 $cart->getCartId();
             }
+
+        // If the form isn't fully filled out
+        } else {
+
+            $msg = 'Please make sure you enter a username and password';
         }
 
         // Before you can run any operations on $session you have to save it
@@ -143,6 +148,7 @@ class LoginController extends Controller {
         $msg = null;
         $username = $req->get('username');
         $password = $req->get('password');
+        $passwordCheck = $req->get('passwordCheck');
 
         // If already logged on just render page with "Welcome" message
         if($loggedIn == true) {
@@ -161,10 +167,10 @@ class LoginController extends Controller {
 
         // Check for form entry
         // If values in all fields and submit button was pressed, check for illegal characters
-        if (!empty($username) && !empty($password) && !empty($name) && $req->getMethod() == 'POST') {
+        if (!empty($username) && !empty($password) && !empty($passwordCheck) && !empty($name) && $req->getMethod() == 'POST') {
 
             // Prevent MySQL injection - if anything uses illegal characters, tell user
-            if(!preg_match("#^[a-zA-Z0-9]+$#", $username) || !preg_match("#^[a-zA-Z0-9]+$#", $password) || !preg_match("#^[a-zA-Z0-9]+$#", $name)) {
+            if(!preg_match("#^[a-zA-Z0-9]+$#", $username) || !preg_match("#^[a-zA-Z0-9]+$#", $password) || !preg_match("#^[a-zA-Z0-9]+$#", $passwordCheck) || !preg_match("#^[a-zA-Z0-9]+$#", $name)) {
 
                 // Set error message
                 $msg = 'Make sure everything contains only numbers and letters';
@@ -182,7 +188,8 @@ class LoginController extends Controller {
                         'name' => $name,
                         'msg' => $msg,
                         'username' => $username,
-                        'password' => $password
+                        'password' => $password,
+                        'passwordCheck' => $passwordCheck
                     )
                 );
             }
@@ -194,11 +201,11 @@ class LoginController extends Controller {
             FROM
                 aca_user
             WHERE
-                username='$username'";
+                username= :username";
 
             $db = $this->get('acadb');
 
-            $data = $db->fetchRow($query);
+            $data = $db->fetchRow($query, array('username' => $username));
 
             // Login already exists
             if (count($data) > 0 && $req->getMethod() == 'POST') {
@@ -212,6 +219,25 @@ class LoginController extends Controller {
 
             // Login does not exist
             } else {
+
+                // Make sure password was entered properly in both fields
+                if ($password != $passwordCheck) {
+
+                    $msg = 'Please make sure you properly entered your password in both fields';
+
+                    return $this->render(
+                        'AcaShopBundle:LoginForm:registration.html.twig',
+                        array(
+                            'loggedIn' => $loggedIn,
+                            'name' => $name,
+                            'msg' => $msg,
+                            'username' => $username,
+                            'password' => $password,
+                            'passwordCheck' => $passwordCheck
+                        )
+                    );
+                }
+
 
                 // Create new user
                 $userId = $db->insert('aca_user', array('name' => $name, 'username' => $username, 'password' => $password));
@@ -241,7 +267,8 @@ class LoginController extends Controller {
                         'name' => $name,
                         'msg' => $msg,
                         'username' => $username,
-                        'password' => $password
+                        'password' => $password,
+                        'passwordCheck' => $passwordCheck
                     )
                 );
             }
@@ -267,7 +294,8 @@ class LoginController extends Controller {
                 'name' => $name,
                 'msg' => $msg,
                 'username' => $username,
-                'password' => $password
+                'password' => $password,
+                'passwordCheck' => $passwordCheck
             )
         );
     }

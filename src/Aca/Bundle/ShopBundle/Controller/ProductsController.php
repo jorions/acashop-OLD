@@ -50,9 +50,6 @@ class ProductsController extends Controller {
             )
         );*/
 
-        // OLD METHOD WITHOUT SERVICE
-        //$db = new Database();
-
         // NEW METHOD USING SERVICE
         $db = $this->get('acadb');
 
@@ -81,6 +78,7 @@ class ProductsController extends Controller {
         $db = $this->get('acadb');
         $cart = $this->get('cart');
 
+        // Used to determine if the product on the page is already in the cart
         $alreadyInCart = false;
 
         $query = "
@@ -111,7 +109,10 @@ class ProductsController extends Controller {
             // Query DB
             $cartData = $db->fetchRowMany($query, array('cartID' => $cart->getCartId()));
 
+            // If there is data in the returned array of ids...
             if(count($cartData) > 0) {
+
+                // Iterate through the cart array, and if the id of the given product is already in the cart, then set the variable accordingly
                 foreach ($cartData as $id) {
                     if ($id['product_id'] == $data['id']) {
                         $alreadyInCart = true;
@@ -119,7 +120,7 @@ class ProductsController extends Controller {
                 }
             }
 
-            // Product page
+            // Product page with no error
             return $this->render(
                 'AcaShopBundle:Products:product.page.html.twig',
                 array(
@@ -131,6 +132,7 @@ class ProductsController extends Controller {
 
         } else {
 
+            // Product page with error ($alreadyInCart not needed in this case
             return $this->render(
                 'AcaShopBundle:Products:product.page.html.twig',
                 array(
