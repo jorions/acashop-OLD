@@ -1,0 +1,176 @@
+/*!
+ * Start Bootstrap - Heroic Features HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.hero-spacer {
+    margin-top: 50px;
+}
+
+.hero-feature {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+
+/* ########################################################################################################################
+   ################################################### Custom CSS #########################################################
+   ######################################################################################################################## */
+
+.hero-spacer-centered {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.login-form {
+    width: 200px;
+    margin: auto;
+    text-align: center;
+    height: 230px;
+}
+
+.login-form form {
+    width: 190px;
+    margin: auto;
+    display: inline-block;
+}
+
+.login-form input[type=submit] {
+    width: 150px;
+}
+
+.centering {
+    margin: 30px auto;
+    display: inline-block;
+    width: 100%;
+}
+
+.btn-reverse-colors, .btn-reverse-colors-href {
+    background: white;
+    color: #337ab7;
+}
+
+.btn-reverse-colors-href {
+    width: 150px;
+}
+
+.btn-red-color {
+    background: #b22a2d;
+    color: white;
+}
+
+.btn-red-color:hover {
+    background: #762728;
+    color: white;
+}
+
+.error {
+    text-align: center;
+    color: #337ab7;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.caption-static-size {
+    overflow: hidden;
+    height: 125px;
+}
+
+.product-custom:hover {
+    text-decoration: none;
+}
+
+.product-custom {
+    height: 360px;
+}
+
+.thumbnail-custom {
+    height: 360px;
+}
+
+.thumbnail-custom:hover {
+    -moz-box-shadow: 0 0 10px #000000;
+    -webkit-box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px #000000;
+}
+
+.thumbnail-custom img {
+    height: 150px;
+}
+
+.caption-custom {
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}
+
+.h3-modified {
+    font-size: 20px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.img-responsive-custom {
+    max-height: 600px;
+    max-width: 100%;
+    display: block;
+    margin: 20px auto;
+}
+
+select {
+    height: 34px;
+    padding-bottom: 3px;
+}
+
+table.cart {
+    margin: 0 auto;
+}
+
+tr.cart {
+    border-bottom: 1px solid black;
+}
+
+.cart-name {
+    width: 400px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cart-img {
+    height: 100px;
+}
+
+td.cart-spacer {
+    height: 60px;
+    width: 10px;
+}
+
+.cart-name-total {
+    width: 400px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.cart-price-total {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.btn-checkout {
+    width: 162px;
+    background: #5bcf44;
+    color: white;
+}
+
+.btn-checkout:hover {
+    background: #50ab3b;
+    color: white;
+}
