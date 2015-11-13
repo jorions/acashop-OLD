@@ -40,11 +40,17 @@ class CartService
      * Create a cart record, and return the id if it doesn't exist
      * If it does exist, just return the id
      * @return int id
+     * @throws \Exception
      */
     public function getCartId()
     {
         // Get current user ID
         $userId = $this->session->get('user_id');
+
+        // Make sure user ID exist
+        if (empty($userId)) {
+            throw new \Exception('You must be logged in');
+        }
 
         // Set cart ID query
         $cartId = "
@@ -81,13 +87,30 @@ class CartService
     public function getCart()
     {
 
-        $query = "
+        /*$query = "
             SELECT
               *
             FROM
               aca_cart_product
             WHERE
-              cart_id = :cartId";
+              cart_id = :cartId";*/
+
+        $query = "
+            SELECT
+              p.id as p_id,
+              p.name as p_name,
+              p.image as p_image,
+              cp.price as cp_price,
+              cp.product_id as cp_product_id,
+              cp.id as cp_id,
+              cp.cart_id as cp_cart_id,
+              cp.quantity as cp_quantity
+            FROM
+              aca_cart_product as cp
+              LEFT JOIN aca_product as p on (p.id = cp.product_id)
+              LEFT JOIN aca_cart as ct on (ct.id = cp.cart_id)
+            WHERE
+              ct.id = :cartId";
 
         return $this->db->fetchRowMany($query, array('cartId' => $this->cartId));
     }
@@ -112,7 +135,6 @@ class CartService
 
         // Set variables for insert statement
         $data = $this->db->fetchRow($query, array('productId' => $productId));
-        $name = $data['name'];
         $price = $data['price'];
 
         // Insert item into aca_cart_product table
@@ -120,7 +142,7 @@ class CartService
         // ??? WHERE IN ALL OF THIS SHOULD WE BE TRYING TO TRY/CATCH? THERE ARE SO MANY INTERDEPENDENCIES EVERYWHERE THAT IT SEEMS LIKE MOST OF MY CODE SHOULD HAVE TRY/CATCH
         // ??? FIGURE IT OUT, THEN IMPLEMENT ON removeProduct() AND updateProduct()
         try {
-            $this->db->insert('aca_cart_product', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'product_name' => $name, 'price' => $price, 'quantity' => $quantity));
+            $this->db->insert('aca_cart_product', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'price' => $price, 'quantity' => $quantity));
         } catch (\Exception $e) {
             return $e;
         }
