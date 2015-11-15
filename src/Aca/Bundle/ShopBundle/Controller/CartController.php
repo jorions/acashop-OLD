@@ -22,7 +22,8 @@ class CartController extends Controller
         return $this->render(
             'AcaShopBundle:Cart:show.cart.html.twig',
             array(
-                'cart' => $data
+                'cart' => $data,
+                'loggedIn' => $this->get('login')->loggedInCheck()
             )
         );
     }

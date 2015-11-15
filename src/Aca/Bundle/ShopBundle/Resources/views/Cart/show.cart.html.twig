@@ -5,75 +5,81 @@
 {% endblock title %}
 
 {% block content %}
-    <header class="jumbotron hero-spacer-centered">
-        <h1>Your Cart</h1>
-    </header>
 
-    <!-- Set this outside the for loop so it is available to show outside the for loop -->
-    {% set totalPrice = 0 %}
+    {% if loggedIn %}
 
-    <table class="cart">
-        {% for item in cart %}
-            <tr class="cart">
-                <td><img class="cart-img" src="{{ item.p_image }}" /></td>
-                <td class="cart-name">{{ item.p_name }}</td>
-                <td class="cart-spacer"></td>
-                <td>${{ item.cp_price|number_format(2, '.', ',') }}</td>
-                <td class="cart-spacer"></td>
-                <td>
-                    <form action="/updateCart" method="POST">
-                        <input type="hidden" name="product_id" value="{{ item.p_id }}" />
-                </td>
-                <td class="cart-spacer"></td>
-                <td>
-                        <select class="cart" name="quantity">
-                        {% for i in 1..10 %}
-                            <option value="{{ i }}"
-                            {% if i == item.cp_quantity %}
-                                selected
-                            {% endif %}
-                            >{{ i }}
-                            </option>
-                        {% endfor %}
-                        </select>
-                </td>
-                <td class="cart-spacer"></td>
-                <td>
-                        <input class="btn btn-primary" type="submit" name="updateCart-{{ item.cp_id }}" value="Update" />
-                    </form>
-                </td>
-                <td class="cart-spacer"></td>
-                <td>
-                    <form action="/removeCart" method="POST">
-                        <input type="hidden" name="product_id" value="{{ item.p_id }}" />
-                        <input class="btn btn-red-color" type="submit" name="removeCart-{{ item.cp_id }}" value="Remove" />
-                    </form>
-                </td>
-            </tr>
-            {% set totalPrice = totalPrice + (item.cp_quantity * item.cp_price) %}
-        {% endfor %}
-        {% if totalPrice > 0 %}
-            <tr>
-                <td></td>
-                <td class="cart-name-total">Total</td>
-                <td class="cart-spacer"></td>
-                <td class="cart-price-total">${{ totalPrice|number_format(2, '.', ',') }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3">
-                    <form action="/checkout">
-                        <input class="btn btn-checkout" type="submit" name="checkout" value="Checkout">
-                    </form>
-                </td>
-            </tr>
-        </table>
+        <header class="jumbotron hero-spacer-centered">
+            <h1>Your Cart</h1>
+        </header>
 
-        {% else %}
+        <!-- Set this outside the for loop so it is available to show outside the for loop -->
+        {% set totalPrice = 0 %}
+
+        <table class="cart">
+            {% for item in cart %}
+                <tr class="cart">
+                    <td><div class="cart-img-container"><img class="cart-img" src="{{ item.p_image }}" /></div></td>
+                    <td class="cart-name">{{ item.p_name }}</td>
+                    <td class="cart-spacer"></td>
+                    <td>${{ item.cp_price|number_format(2, '.', ',') }}</td>
+                    <td class="cart-spacer"></td>
+                    <td>
+                        <form action="/updateCart" method="POST">
+                            <input type="hidden" name="product_id" value="{{ item.p_id }}" />
+                    </td>
+                    <td class="cart-spacer"></td>
+                    <td>
+                            <select class="cart" name="quantity">
+                            {% for i in 1..10 %}
+                                <option value="{{ i }}"
+                                {% if i == item.cp_quantity %}
+                                    selected
+                                {% endif %}
+                                >{{ i }}
+                                </option>
+                            {% endfor %}
+                            </select>
+                    </td>
+                    <td class="cart-spacer"></td>
+                    <td>
+                            <input class="btn btn-primary" type="submit" name="updateCart" value="Update" />
+                        </form>
+                    </td>
+                    <td class="cart-spacer"></td>
+                    <td>
+                        <form action="/removeCart" method="POST">
+                            <input type="hidden" name="product_id" value="{{ item.p_id }}" />
+                            <input class="btn btn-red-color" type="submit" name="removeCart" value="Remove" />
+                        </form>
+                    </td>
+                </tr>
+                {% set totalPrice = totalPrice + (item.cp_quantity * item.cp_price) %}
+            {% endfor %}
+            {% if totalPrice > 0 %}
+                <tr>
+                    <td></td>
+                    <td class="cart-name-total">Total</td>
+                    <td class="cart-spacer"></td>
+                    <td class="cart-price-total">${{ totalPrice|number_format(2, '.', ',') }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="3">
+                        <form action="/checkout">
+                            <input class="btn btn-checkout" type="submit" name="checkout" value="Checkout">
+                        </form>
+                    </td>
+                </tr>
             </table>
-            <h3>Your cart is empty - go buy something!</h3>
-        {% endif %}
+
+            {% else %}
+                </table>
+                <h3>Your cart is empty - go buy something!</h3>
+            {% endif %}
+    {% else %}
+            You must be logged in to purchase products. <a href="/">Click here to login.</a>
+    {% endif %}
 
 {% endblock content %}

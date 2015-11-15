@@ -22,48 +22,23 @@ class LoginController extends Controller {
      */
     public function loginFormAction(Request $req)
     {
+        $login = $this->get('login');
+
         $msg = null;
 
         // Sets the $session variable by getting the session
-        $session = $this->getSession();
+        $session = $login->getSession();
         $username = $req->get('username');
         $password = $req->get('password');
 
         if (!empty($username) && !empty($password)) {
 
-            $query = "
-            SELECT
-                *
-            FROM
-                aca_user
-            WHERE
-                username= :username
-                and password= :password";
-
-            $db = $this->get('acadb');
-
-            $data = $db->fetchRow($query, array('username' => $username, 'password' => $password));
-
             // Invalid login
-            if (empty($data)) {
-
+            if(!$login->checkLogin($username, $password)){
                 $msg = 'Please check your credentials';
-                $session->set('loggedIn', false);
 
             // Valid login
             } else {
-
-                // Get user's name from returned query
-                $name = $data['name'];
-                $id = $data['id'];
-
-                // Set session variables
-                $session->set('loggedIn', true);
-                $session->set('name', $name);
-                $session->set('username', $username);
-                $session->set('password', $password);
-                $session->set('user_id', $id);
-
                 // Set up shopping cart
                 $cart = $this->get('cart');
                 $cart->getCartId();
@@ -74,9 +49,6 @@ class LoginController extends Controller {
 
             $msg = 'Please make sure you enter a username and password';
         }
-
-        // Before you can run any operations on $session you have to save it
-        $session->save();
 
         $loggedIn = $session->get('loggedIn');
 
@@ -104,7 +76,7 @@ class LoginController extends Controller {
      * Get a started session
      * @return \Symfony\Component\HttpFoundation\Session\Session
      */
-    public function getSession()
+    /*public function getSession()
     {
         $session = $this->get('session');
 
@@ -112,8 +84,9 @@ class LoginController extends Controller {
             $session->start();
         }
 
+
         return $session;
-    }
+    }*/
 
     /**
      * Logout logic
@@ -121,14 +94,8 @@ class LoginController extends Controller {
      */
     public function logoutAction()
     {
-        $session = $this->getSession();
+        $this->get('login')->logout();
 
-        $session->remove('loggedIn');
-        $session->remove('name');
-
-        $session->save();
-
-        // This is another type of response object
         return new RedirectResponse('/');
     }
 
@@ -139,8 +106,12 @@ class LoginController extends Controller {
      */
     public function registrationAction(Request $req) {
 
+        // Set up DB
+        $db = $this->get('acadb');
+
         // Get or start a session
-        $session = $this->getSession();
+        $login = $this->get('login');
+        $session = $login->getSession();
 
         // Set variables to check for form entry
         $loggedIn = $session->get('loggedIn');
@@ -195,20 +166,8 @@ class LoginController extends Controller {
             }
 
             // Now that we know there is no MySQL injection, query DB
-            $query = "
-            SELECT
-                *
-            FROM
-                aca_user
-            WHERE
-                username= :username";
-
-            $db = $this->get('acadb');
-
-            $data = $db->fetchRow($query, array('username' => $username));
-
             // Login already exists
-            if (count($data) > 0 && $req->getMethod() == 'POST') {
+            if (!$login->checkRegistration($username) && $req->getMethod() == 'POST') {
 
                 // Set error message
                 $msg = 'That username already exists - please try another';
@@ -245,15 +204,8 @@ class LoginController extends Controller {
                 // Set render array variable now that user credentials have been created
                 $loggedIn = true;
 
-                // Set session values
-                $session->set('loggedIn', $loggedIn);
-                $session->set('name', $name);
-                $session->set('username', $username);
-                $session->set('password', $password);
-                $session->set('user_id', $userId);
-
-                // Save session
-                $session->save();
+                // Set and save session values
+                $login->setSession($loggedIn, $name, $username, $password, $userId);;
 
                 // Set up shopping cart
                 $cart = $this->get('cart');

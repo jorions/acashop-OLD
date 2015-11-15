@@ -17,3 +17,8 @@ services:
   cart:
     class: Aca\Bundle\ShopBundle\Service\CartService
     arguments: [@acadb, @session]
+
+
+  login:
+    class: Aca\Bundle\ShopBundle\Service\LoginService
+    arguments: [@acadb, @session]

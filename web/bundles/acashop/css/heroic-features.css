@@ -129,6 +129,8 @@ footer {
 select {
     height: 34px;
     padding-bottom: 3px;
+    /* needed for Mac Chrome formatting to work (it is a webkit browser) */
+    -webkit-appearance:none;
 }
 
 table.cart {
@@ -146,7 +148,16 @@ tr.cart {
 }
 
 .cart-img {
-    height: 100px;
+    max-height: 100px;
+    max-width: 120px;
+}
+
+.cart-img-container {
+    width: 120px;
+    height: 120px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
 }
 
 td.cart-spacer {
