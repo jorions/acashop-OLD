@@ -79,7 +79,10 @@
                 <h3>Your cart is empty - go buy something!</h3>
             {% endif %}
     {% else %}
-            You must be logged in to purchase products. <a href="/">Click here to login.</a>
+        <span class="login-error">You must be logged in to purchase products.</span>
+        <br />
+        <br />
+        <a class="btn-href" href="/"><button class="btn btn-primary">Login</button></a>
     {% endif %}
 
 {% endblock content %}

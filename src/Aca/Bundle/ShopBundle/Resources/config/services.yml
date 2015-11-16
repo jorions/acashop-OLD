@@ -22,3 +22,8 @@ services:
   login:
     class: Aca\Bundle\ShopBundle\Service\LoginService
     arguments: [@acadb, @session]
+
+
+  profile:
+    class: Aca\Bundle\ShopBundle\Service\ProfileService
+    arguments: [@acadb, @session]

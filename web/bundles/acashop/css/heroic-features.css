@@ -72,11 +72,25 @@ footer {
     color: white;
 }
 
+.btn-href {
+    color: white;
+}
+
+.btn-href:hover {
+    color: white;
+    text-decoration: none;
+}
+
 .error {
     text-align: center;
     color: #337ab7;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.login-error {
+    color: #337ab7;
+    font-size: 16px;
 }
 
 .caption-static-size {
@@ -120,7 +134,7 @@ footer {
 }
 
 .img-responsive-custom {
-    max-height: 600px;
+    max-height: 500px;
     max-width: 100%;
     display: block;
     margin: 20px auto;

@@ -8,8 +8,6 @@ use Aca\Bundle\Shopbundle\Controller;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-
 class LoginService {
     /**
      * Database class

@@ -14,18 +14,32 @@ class CartController extends Controller
     public function showCartAction()
     {
 
-        $cart = $this->get('cart');
+        $loggedIn = $this->get('login')->loggedInCheck();
 
-        // Get array of cart contents
-        $data = $cart->getCart();
+        // If logged in show cart
+        if($loggedIn) {
+            $cart = $this->get('cart');
 
-        return $this->render(
-            'AcaShopBundle:Cart:show.cart.html.twig',
-            array(
-                'cart' => $data,
-                'loggedIn' => $this->get('login')->loggedInCheck()
-            )
-        );
+            // Get array of cart contents
+            $data = $cart->getCart();
+
+            return $this->render(
+                'AcaShopBundle:Cart:show.cart.html.twig',
+                array(
+                    'cart' => $data,
+                    'loggedIn' => $loggedIn
+                )
+            );
+
+        // Otherwise render page without cart
+        } else {
+            return $this->render(
+                'AcaShopBundle:Cart:show.cart.html.twig',
+                array(
+                    'loggedIn' => $loggedIn
+                )
+            );
+        }
     }
 
     /**

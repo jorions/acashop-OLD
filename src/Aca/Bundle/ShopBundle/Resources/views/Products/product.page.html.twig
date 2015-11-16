@@ -15,41 +15,53 @@
         </header>
     {% else %}
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <h2 class="modified centered"><b>{{ product.name }}</b></h2>
-                <img class="img-responsive-custom" src="{{ product.image }}" alt="{{ product.name }}"/>
-                <div class="caption-full">
-                    <p>{{ product.description }}</p>
-                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-responsive-custom" src="{{ product.image }}" alt="{{ product.name }}"/>
+            </div>
+            <div class="col-md-5">
+                <div class="caption-full">
+                    <br />
+                    <br />
+                    <br />
+                    <p>{{ product.description }}</p>
+                </div>
 
-        <h3>${{ product.price|number_format(2, '.', ',') }}</h3>
+                <h3>${{ product.price|number_format(2, '.', ',') }}</h3>
 
-        {% if loggedIn %}
-            {% if alreadyInCart %}
-                <form action="/updateCart" method="POST">
-                    <input class="btn btn-primary" type="submit" name="updateCart" value="Update Cart" />
-            {% else %}
-                <form action="/cart" method="POST">
-                    <input class="btn btn-primary" type="submit" name="addToCart" value="Add to Cart" />
-            {% endif %}
-                    <input type="hidden" name="product_id" value="{{ product.id }}" />
-                    <select name="quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </form>
-        {% else %}
-            You must be logged in to purchase products. <a href="/">Click here to login.</a>
-        {% endif %}
+                {% if loggedIn %}
+                    {% if alreadyInCart %}
+                        <form action="/updateCart" method="POST">
+                            <input class="btn btn-primary" type="submit" name="updateCart" value="Update Cart" />
+                    {% else %}
+                        <form action="/cart" method="POST">
+                            <input class="btn btn-primary" type="submit" name="addToCart" value="Add to Cart" />
+                    {% endif %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}" />
+                            <select name="quantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </form>
+                {% else %}
+                    <span class="login-error">You must be logged in to purchase products.</span>
+                    <br />
+                    <br />
+                    <a class="btn-href" href="/"><button class="btn btn-primary">Login</button></a>
+                {% endif %}
+            </div>
+        </div>
     {% endif %}
 {% endblock content %}

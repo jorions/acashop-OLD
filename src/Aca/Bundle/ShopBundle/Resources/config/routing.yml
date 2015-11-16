@@ -77,4 +77,36 @@ aca_cart_remove_route:
     defaults: {_controller: AcaShopBundle:Cart:removeCart }
     methods: [POST]
 
-#
+aca_profile_route:
+    path: /profile
+    defaults: {_controller: AcaShopBundle:Profile:profilePage }
+    methods: [GET]
+
+
+
+### TBD IF THIS IS THE BEST ROUTING SETUP ###
+
+aca_profile_update_shipping_route:
+    path: /profile
+    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateShipping }
+    methods: [POST]
+
+aca_profile_update_billing_route:
+    path: /profile_update_shipping
+    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateBilling }
+    methods: [POST]
+
+aca_profile_update_name_route:
+    path: /profile_update_name
+    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateName }
+    methods: [POST]
+
+aca_profile_update_username_route:
+    path: /profile_update_username
+    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateUsername }
+    methods: [POST]
+
+aca_profile_update_password_route:
+    path: /profile_update_password
+    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdatePassword }
+    methods: [POST]

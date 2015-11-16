@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    <title>Your profile</title>
+{% endblock title %}
+
+{% block content %}
+
+    {% if loggedIn %}
+
+        {{ id }}
+
+        {{ address.street }} - {{ address.city }} - {{ address.zip }}
+
+    {% else %}
+
+        <span class="login-error">You must be logged in to view your profile.</span>
+        <br />
+        <br />
+        <a class="btn-href" href="/"><button class="btn btn-primary">Login</button></a>
+
+    {% endif %}
+
+{% endblock content %}
