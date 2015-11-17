@@ -49,7 +49,7 @@ class ProfileController extends Controller {
 
                         // With all checks set, update shipping
                         $profile->setShippingAddress($shippingStreet, $shippingCity, $shippingState, $shippingZip);
-                        $shippingMsg = 'Shipping address successfully updated!';
+                        $shippingMsg = 'Shipping address updated!';
 
                     // If zip is invalid set $msg to error
                     } else {
@@ -90,7 +90,7 @@ class ProfileController extends Controller {
 
                         // With all checks set, update billing
                         $profile->setBillingAddress($billingStreet, $billingCity, $billingState, $billingZip);
-                        $billingMsg = 'Billing address successfully updated!';
+                        $billingMsg = 'Billing address updated!';
 
                         // If zip is invalid set $msg to error
                     } else {
@@ -118,7 +118,7 @@ class ProfileController extends Controller {
             $userInfo = $profile->getUserInfo();
             $name = $userInfo['name'];
             $username = $userInfo['username'];
-            $password = $userInfo['password'];
+            //$password = $userInfo['password'];
 
 
 
@@ -133,9 +133,18 @@ class ProfileController extends Controller {
                     // Prevent MySQL injection - make sure all characters are legal
                     if(preg_match("#^[a-zA-Z0-9]+$#", $name)) {
 
-                        // Set new name
-                        $profile->updateName($name);
-                        $nameMsg = 'Name updated!';
+                        // Make sure new name is different than current name
+                        if($name != $userInfo['name']) {
+
+                            // Set new name
+                            $profile->updateName($name);
+                            $nameMsg = 'Name updated!';
+
+                        // If new name is same as current name tell user
+                        } else {
+
+                            $nameMsg = 'That\'s your current name!';
+                        }
 
                     // If any illegal characters tell user
                     } else {
