@@ -80,19 +80,15 @@ aca_cart_remove_route:
 aca_profile_route:
     path: /profile
     defaults: {_controller: AcaShopBundle:Profile:profilePage }
-    methods: [GET]
-
-
-
-### TBD IF THIS IS THE BEST ROUTING SETUP ###
+    methods: [GET, POST]
 
 aca_profile_update_shipping_route:
-    path: /profile
+    path: /profile_update_shipping
     defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateShipping }
     methods: [POST]
 
 aca_profile_update_billing_route:
-    path: /profile_update_shipping
+    path: /profile_update_billing
     defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateBilling }
     methods: [POST]
 

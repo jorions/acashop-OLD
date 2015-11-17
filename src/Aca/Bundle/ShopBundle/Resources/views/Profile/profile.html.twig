@@ -8,9 +8,92 @@
 
     {% if loggedIn %}
 
-        {{ id }}
+        <h3>SHIPPING</h3>
+        <br />
+        {% if shippingMsg %}
+            {{ shippingMsg }}
+        {% endif %}
 
-        {{ address.street }} - {{ address.city }} - {{ address.zip }}
+        <form action="/profile" method="POST">
+            <input type="text" name="shippingStreet" value="{{ shippingStreet }}" />
+            <br />
+            <input type="text" name="shippingCity" value="{{ shippingCity }}" />
+            <br />
+            <input type="text" name="shippingState" value="{{ shippingState }}" />
+            <br />
+            <input type="text" name="shippingZip" value="{{ shippingZip }}" />
+            <br />
+            <input class="btn btn-primary" type="submit" name="updateShipping" value="Update" />
+        </form>
+
+        <br />
+        <br />
+
+        <h3>BILLING</h3>
+        <br />
+        {% if billingMsg %}
+            {{ billingMsg }}
+        {% endif %}
+
+        <form action="/profile" method="POST">
+            <input type="text" name="billingStreet" value="{{ billingStreet }}" />
+            <br />
+            <input type="text" name="billingCity" value="{{ billingCity }}" />
+            <br />
+            <input type="text" name="billingState" value="{{ billingState }}" />
+            <br />
+            <input type="text" name="billingZip" value="{{ billingZip }}" />
+            <br />
+            <input class="btn btn-primary" type="submit" name="updateBilling" value="Update" />
+        </form>
+
+        <br />
+        <br />
+
+        <h3>NAME</h3>
+        <br />
+        {% if nameMsg %}
+            {{ nameMsg }}
+        {% endif %}
+
+        <form action="/profile" method="POST">
+            <input type="text" name="name" value="{{ name }}" />
+            <br />
+            <input class="btn btn-primary" type="submit" name="updateName" value="Update" />
+        </form>
+
+        <br />
+        <br />
+
+        <h3>USERNAME</h3>
+        <br />
+        {% if usernameMsg %}
+            {{ usernameMsg }}
+        {% endif %}
+
+        <form action="/profile" method="POST">
+            <input type="text" name="username" value="{{ username }}" />
+            <br />
+            <input class="btn btn-primary" type="submit" name="updateUsername" value="Update" />
+        </form>
+
+        <br />
+        <br />
+
+        <h3>PASSWORD</h3>
+        <br />
+        {% if passwordMsg %}
+            {{ passwordMsg }}
+        {% endif %}
+
+        <form action="/profile" method="POST">
+            <input type="password" name="password" value="" />
+            <br />
+            <input type="password" name="passwordCheck" value="" />
+            <br />
+            <input class="btn btn-primary" type="submit" name="updatePassword" value="Update" />
+        </form>
+
 
     {% else %}
 
