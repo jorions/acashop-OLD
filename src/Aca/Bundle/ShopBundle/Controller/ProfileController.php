@@ -65,10 +65,20 @@ class ProfileController extends Controller {
             } else {
                 $data = $profile->getShippingAddress();
 
-                $shippingStreet = $data['street'];
-                $shippingCity = $data['city'];
-                $shippingState = $data['state'];
-                $shippingZip = $data['zip'];
+                // If there is a shipping address, set variables accordingly
+                if(!empty($data)) {
+                    $shippingStreet = $data['street'];
+                    $shippingCity = $data['city'];
+                    $shippingState = $data['state'];
+                    $shippingZip = $data['zip'];
+
+                    // If there is no shipping address, set variables to empty
+                } else {
+                    $shippingStreet = null;
+                    $shippingCity = null;
+                    $shippingState = null;
+                    $shippingZip = null;
+                }
             }
 
 
@@ -106,10 +116,20 @@ class ProfileController extends Controller {
             } else {
                 $data = $profile->getBillingAddress();
 
-                $billingStreet = $data['street'];
-                $billingCity = $data['city'];
-                $billingState = $data['state'];
-                $billingZip = $data['zip'];
+                // If there is a billing address, set variables accordingly
+                if(!empty($data)) {
+                    $billingStreet = $data['street'];
+                    $billingCity = $data['city'];
+                    $billingState = $data['state'];
+                    $billingZip = $data['zip'];
+
+                // If there is no billing address, set variables to empty
+                } else {
+                    $billingStreet = null;
+                    $billingCity = null;
+                    $billingState = null;
+                    $billingZip = null;
+                }
             }
 
 
