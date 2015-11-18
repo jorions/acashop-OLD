@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    <title>Review Your Order</title>
+{% endblock title %}
+
+{% block content %}
+
+    <header class="jumbotron hero-spacer-centered">
+        <h1>Your Order</h1>
+    </header>
+
+    <!-- Set this outside the for loop so it is available to show outside the for loop -->
+    {% set totalPrice = 0 %}
+
+    <table class="cart">
+    {% for item in cart %}
+        {% set rowPrice = item.cp_price * item.cp_quantity %}
+        <tr class="cart">
+            <td><div class="cart-img-container"><img class="cart-img" src="{{ item.p_image }}" /></div></td>
+            <td class="cart-name">{{ item.p_name }}</td>
+            <td class="cart-spacer"></td>
+            <td>${{ item.cp_price|number_format(2, '.', ',') }}</td>
+            <td class="cart-spacer"></td>
+            <td> {{ item.cp_quantity }}</td>
+            <td class="cart-spacer"></td>
+            <td class="cart-spacer"></td>
+            <td>${{ rowPrice|number_format(2, '.', ',') }}</td>
+        </tr>
+        {% set totalPrice = totalPrice + (item.cp_quantity * item.cp_price) %}
+    {% endfor %}
+    {% if totalPrice > 0 %}
+        <tr>
+            <td></td>
+            <td class="cart-name-total">Total</td>
+            <td class="cart-spacer"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="cart-price-total">${{ totalPrice|number_format(2, '.', ',') }}</td>
+        </tr>
+        </table>
+    {% endif %}
+
+    <form action="/place_order" method="POST">
+        <input type="hidden" name="submit_check" value="1" />
+        <input class="btn btn-checkout" type="submit" name="checkout" value="Checkout" />
+    </form>
+
+{% endblock content %}

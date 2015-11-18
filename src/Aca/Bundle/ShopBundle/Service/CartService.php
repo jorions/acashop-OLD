@@ -71,6 +71,9 @@ class CartService
             // So this simultaneously inserts a new cart and sets $cartId = to the last-inserted ID
             $cartId = $this->db->insert('aca_cart', array('user_id' => $userId));
 
+            // Set session variable to $cartId
+            $this->session->set('cart_id', $cartId);
+
         } else {
 
             $cartId = $data['id'];
@@ -170,5 +173,17 @@ class CartService
     public function updateProduct($productId, $quantity, $cartId)
     {
         $this->db->update('aca_cart_product', array('product_id' => $productId, 'cart_id' => $cartId), array('quantity' => $quantity));
+    }
+
+
+    /**
+     * Delete a shopping cart
+     * @throws \Exception
+     */
+    public function removeCart()
+    {
+        // Delete order from cart
+        $this->db->delete('aca_cart_product', array('cart_id' => $this->cartId));
+        $this->db->delete('aca_cart', array('id' => $this->cartId));
     }
 }

@@ -82,27 +82,18 @@ aca_profile_route:
     defaults: {_controller: AcaShopBundle:Profile:profilePage }
     methods: [GET, POST]
 
-aca_profile_update_shipping_route:
-    path: /profile_update_shipping
-    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateShipping }
+aca_order_review_route:
+    path: /review_order
+    defaults: {_controller: AcaShopBundle:Order:reviewOrder }
+    methods: [GET, POST]
+
+aca_place_order_route:
+    path: /place_order
+    defaults: {_controller: AcaShopBundle:Order:placeOrder }
     methods: [POST]
 
-aca_profile_update_billing_route:
-    path: /profile_update_billing
-    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateBilling }
-    methods: [POST]
+aca_order_thank_you_route:
+    path: /thank_you
+    defaults: {_controller: AcaShopBundle:Order:thankYou }
+    methods: [GET]
 
-aca_profile_update_name_route:
-    path: /profile_update_name
-    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateName }
-    methods: [POST]
-
-aca_profile_update_username_route:
-    path: /profile_update_username
-    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdateUsername }
-    methods: [POST]
-
-aca_profile_update_password_route:
-    path: /profile_update_password
-    defaults: {_controller: AcaShopBundle:Profile:profilePageUpdatePassword }
-    methods: [POST]
