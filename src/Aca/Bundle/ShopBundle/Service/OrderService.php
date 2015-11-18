@@ -64,8 +64,7 @@ class OrderService {
             // Add order to order table
             $orderId = $this->db->insert('aca_order',
                 array(
-                    'user_id' => $this->session->get('user_id'),
-                    'oder_date' => 'NOW()'
+                    'user_id' => $this->session->get('user_id')
                 )
             );
 
