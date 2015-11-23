@@ -8,92 +8,102 @@
 
     {% if loggedIn %}
 
-        <h3>SHIPPING</h3>
-        <br />
-        {% if shippingMsg %}
-            {{ shippingMsg }}
-        {% endif %}
 
-        <form action="/profile" method="POST">
-            <input type="text" name="shippingStreet" value="{{ shippingStreet }}" />
-            <br />
-            <input type="text" name="shippingCity" value="{{ shippingCity }}" />
-            <br />
-            <input type="text" name="shippingState" value="{{ shippingState }}" />
-            <br />
-            <input type="text" name="shippingZip" value="{{ shippingZip }}" />
-            <br />
-            <input class="btn btn-primary" type="submit" name="updateShipping" value="Update" />
-        </form>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>NAME</h3>
+                {% if nameMsg %}
+                    <span class="profileMsg">{{ nameMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
 
-        <br />
-        <br />
+                <form action="/profile" method="POST">
+                    <input class="profile" type="text" name="name" value="{{ name }}" />
+                    <br />
+                    <input class="btn btn-primary" type="submit" name="updateName" value="Update" />
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>USERNAME</h3>
+                {% if usernameMsg %}
+                    <span class="profileMsg">{{ usernameMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
 
-        <h3>BILLING</h3>
-        <br />
-        {% if billingMsg %}
-            {{ billingMsg }}
-        {% endif %}
+                <form action="/profile" method="POST">
+                    <input class="profile" type="text" name="username" value="{{ username }}" />
+                    <br />
+                    <input class="btn btn-primary" type="submit" name="updateUsername" value="Update" />
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>PASSWORD</h3>
+                {% if passwordMsg %}
+                    <span class="profileMsg">{{ passwordMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
 
-        <form action="/profile" method="POST">
-            <input type="text" name="billingStreet" value="{{ billingStreet }}" />
-            <br />
-            <input type="text" name="billingCity" value="{{ billingCity }}" />
-            <br />
-            <input type="text" name="billingState" value="{{ billingState }}" />
-            <br />
-            <input type="text" name="billingZip" value="{{ billingZip }}" />
-            <br />
-            <input class="btn btn-primary" type="submit" name="updateBilling" value="Update" />
-        </form>
+                <form action="/profile" method="POST">
+                    <input class="profile" type="password" name="password" value="" placeholder="New password"/>
+                    <br />
+                    <input class="profile" type="password" name="passwordCheck" value="" placeholder="New password (again)"/>
+                    <br />
+                    <input class="btn btn-primary" type="submit" name="updatePassword" value="Update" />
+                </form>
+            </div>
+        </div>
 
-        <br />
-        <br />
-
-        <h3>NAME</h3>
-        <br />
-        {% if nameMsg %}
-            {{ nameMsg }}
-        {% endif %}
-
-        <form action="/profile" method="POST">
-            <input type="text" name="name" value="{{ name }}" />
-            <br />
-            <input class="btn btn-primary" type="submit" name="updateName" value="Update" />
-        </form>
 
         <br />
+        <hr />
         <br />
 
-        <h3>USERNAME</h3>
-        <br />
-        {% if usernameMsg %}
-            {{ usernameMsg }}
-        {% endif %}
 
-        <form action="/profile" method="POST">
-            <input type="text" name="username" value="{{ username }}" />
-            <br />
-            <input class="btn btn-primary" type="submit" name="updateUsername" value="Update" />
-        </form>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>SHIPPING</h3>
+                {% if shippingMsg %}
+                    <span class="profileMsg">{{ shippingMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
 
-        <br />
-        <br />
+                <form action="/profile" method="POST">
+                    <input class="profile" type="text" name="shippingStreet" value="{{ shippingStreet }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="shippingCity" value="{{ shippingCity }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="shippingState" value="{{ shippingState }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="shippingZip" value="{{ shippingZip }}" placeholder="Street"/>
+                    <br />
+                    <input class="btn btn-primary" type="submit" name="updateShipping" value="Update" />
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>BILLING</h3>
+                {% if billingMsg %}
+                    <span class="profileMsg">{{ billingMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
 
-        <h3>PASSWORD</h3>
-        <br />
-        {% if passwordMsg %}
-            {{ passwordMsg }}
-        {% endif %}
-
-        <form action="/profile" method="POST">
-            <input type="password" name="password" value="" />
-            <br />
-            <input type="password" name="passwordCheck" value="" />
-            <br />
-            <input class="btn btn-primary" type="submit" name="updatePassword" value="Update" />
-        </form>
-
+                <form action="/profile" method="POST">
+                    <input class="profile" type="text" name="billingStreet" value="{{ billingStreet }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="billingCity" value="{{ billingCity }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="billingState" value="{{ billingState }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="billingZip" value="{{ billingZip }}" placeholder="Street"/>
+                    <br />
+                    <input class="btn btn-primary" type="submit" name="updateBilling" value="Update" />
+                </form>
+            </div>
+        </div>
 
     {% else %}
 

@@ -22,10 +22,10 @@
             <td class="cart-spacer"></td>
             <td>${{ item.cp_price|number_format(2, '.', ',') }}</td>
             <td class="cart-spacer"></td>
-            <td> {{ item.cp_quantity }}</td>
+            <td><i> x{{ item.cp_quantity }}</i></td>
             <td class="cart-spacer"></td>
             <td class="cart-spacer"></td>
-            <td>${{ rowPrice|number_format(2, '.', ',') }}</td>
+            <td><b>${{ rowPrice|number_format(2, '.', ',') }}</b></td>
         </tr>
         {% set totalPrice = totalPrice + (item.cp_quantity * item.cp_price) %}
     {% endfor %}
@@ -44,9 +44,58 @@
         </table>
     {% endif %}
 
-    <form action="/place_order" method="POST">
-        <input type="hidden" name="submit_check" value="1" />
-        <input class="btn btn-checkout" type="submit" name="checkout" value="Checkout" />
+    <br />
+    <hr />
+    <br />
+
+    <form action="/review_order" method="POST">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <h3 class="centered">SHIPPING</h3>
+                {% if shippingMsg %}
+                    <span class="profileMsg">{{ shippingMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
+                <div class="centered">
+                    <input class="profile" type="text" name="shippingStreet" value="{{ shippingStreet }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="shippingCity" value="{{ shippingCity }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="shippingState" value="{{ shippingState }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="shippingZip" value="{{ shippingZip }}" placeholder="Street"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 class="centered">BILLING</h3>
+                {% if billingMsg %}
+                    <span class="profileMsg">{{ billingMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
+                <div class="centered">
+                    <input class="profile" type="text" name="billingStreet" value="{{ billingStreet }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="billingCity" value="{{ billingCity }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="billingState" value="{{ billingState }}" placeholder="Street"/>
+                    <br />
+                    <input class="profile" type="text" name="billingZip" value="{{ billingZip }}" placeholder="Street"/>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 centered">
+                <input type="hidden" name="checkout_check" value="1" />
+                <input class="btn btn-checkout" type="submit" name="checkout" value="Checkout" />
+            </div>
+        </div>
     </form>
 
 {% endblock content %}

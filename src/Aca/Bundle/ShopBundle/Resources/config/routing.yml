@@ -90,7 +90,7 @@ aca_order_review_route:
 aca_place_order_route:
     path: /place_order
     defaults: {_controller: AcaShopBundle:Order:placeOrder }
-    methods: [POST]
+    methods: [GET]
 
 aca_order_thank_you_route:
     path: /thank_you

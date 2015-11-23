@@ -89,4 +89,27 @@ class OrderService {
 
         }
     }
+
+    public function getSessionOrder()
+    {
+        $query = '
+            SELECT
+              ord.product_id,
+              ord.quantity,
+              ord.price,
+              prod.name,
+              prod.image
+            FROM
+              aca_order_product ord
+                LEFT JOIN
+              aca_product prod
+            ON
+              ord.product_id = prod.id
+            WHERE
+              order_id= :orderId';
+
+        $data = $this->db->fetchRowMany($query, array('orderId' => $this->session->get('order_id')));
+
+        return $data;
+    }
 }

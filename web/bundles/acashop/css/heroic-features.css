@@ -199,3 +199,12 @@ td.cart-spacer {
     background: #50ab3b;
     color: white;
 }
+
+.profile {
+    margin-bottom: 10px;
+}
+
+.profileMsg {
+    text-align: center;
+    color: #337ab7;
+}

@@ -124,7 +124,7 @@ class ProfileController extends Controller
                     $billingState = $data['state'];
                     $billingZip = $data['zip'];
 
-                    // If there is no billing address, set variables to empty
+                // If there is no billing address, set variables to empty
                 } else {
                     $billingStreet = null;
                     $billingCity = null;

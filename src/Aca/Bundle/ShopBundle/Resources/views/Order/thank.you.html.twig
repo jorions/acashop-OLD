@@ -6,8 +6,42 @@
 
 {% block content %}
 
-<header class="jumbotron hero-spacer-centered">
-    <h1>Thanks For Your Order!</h1>
-</header>
+    <header class="jumbotron hero-spacer-centered">
+        <h1>Thanks For Your Order!</h1>
+    </header>
+
+    <!-- Set this outside the for loop so it is available to show outside the for loop -->
+    {% set totalPrice = 0 %}
+
+    <table class="cart">
+    {% for item in order %}
+        {% set rowPrice = item.price * item.quantity %}
+        <tr class="cart">
+            <td><div class="cart-img-container"><img class="cart-img" src="{{ item.image }}" /></div></td>
+            <td class="cart-name">{{ item.name }}</td>
+            <td class="cart-spacer"></td>
+            <td>${{ item.price|number_format(2, '.', ',') }}</td>
+            <td class="cart-spacer"></td>
+            <td><i> x{{ item.quantity }}</i></td>
+            <td class="cart-spacer"></td>
+            <td class="cart-spacer"></td>
+            <td><b>${{ rowPrice|number_format(2, '.', ',') }}</b></td>
+        </tr>
+        {% set totalPrice = totalPrice + rowPrice %}
+    {% endfor %}
+    {% if totalPrice > 0 %}
+        <tr>
+            <td></td>
+            <td class="cart-name-total">Total</td>
+            <td class="cart-spacer"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="cart-price-total">${{ totalPrice|number_format(2, '.', ',') }}</td>
+        </tr>
+        </table>
+    {% endif %}
 
 {% endblock content %}
