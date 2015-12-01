@@ -9,9 +9,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 // Use this for loginFormAction
 use Symfony\Component\HttpFoundation\Request;
 
-// Custom-added namespace
-use PHPMailer;
-
 class OrderController extends Controller {
 
     public function reviewOrderAction(Request $req)
@@ -31,6 +28,7 @@ class OrderController extends Controller {
         // Set up services
         $cart = $this->get('cart');
         $profile = $this->get('profile');
+        $order = $this->get('order');
 
         // Set up render variables
         $loggedIn = $this->get('login')->loggedInCheck();
@@ -169,10 +167,6 @@ class OrderController extends Controller {
 
         $order->placeOrder();
 
-        // Send email
-
-
-
         return new RedirectResponse('thank_you');
     }
 
@@ -201,40 +195,4 @@ class OrderController extends Controller {
         );
     }
 
-
-    public function testAction() {
-
-        $mail = new PhpMailer;
-
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'acashopemail@gmail.com';
-        $mail->Password = 'acashopemailpassword';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-
-        $mail->setFrom('acashopemail@gmail.com', 'Acashop');
-        $mail->addAddress('jared.orion.selcoe@gmail.com', 'Jared Selcoe');
-        $mail->isHTML(true);
-
-        $mail->Subject = 'Test Subject';
-        $mail->Body = '<h2>This is a test</h2>And<br />...This is another test';
-        $mail->AltBody = '<h2>This is a test</h2>And<br />...This is another test';
-
-
-        if(!$mail->send()) {
-            $msg = "Message could not be sent.<br />Mailer Error: $mail->ErrorInfo";
-        } else {
-            $msg = "Message has been sent";
-        }
-
-        return $this->render(
-            'AcaShopBundle:Test:test.html.twig',
-            array(
-                'loggedIn' => true,
-                'msg' => $msg
-            )
-        );
-    }
 }
