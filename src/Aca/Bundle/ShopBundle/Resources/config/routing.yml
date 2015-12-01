@@ -97,3 +97,8 @@ aca_order_thank_you_route:
     defaults: {_controller: AcaShopBundle:Order:thankYou }
     methods: [GET]
 
+aca_test_route:
+    path: /test
+    defaults: {_controller: AcaShopBundle:Order:test }
+    methods: [GET]
+
