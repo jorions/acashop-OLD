@@ -103,6 +103,20 @@
                     <input class="btn btn-primary" type="submit" name="updateBilling" value="Update" />
                 </form>
             </div>
+            <div class="col-md-4">
+                <h3>EMAIL</h3>
+                {% if billingMsg %}
+                    <span class="profileMsg">{{ billingMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
+
+                <form action="/profile" method="POST">
+                    <input class="profile" type="text" name="email" value="PUT { { EMAIL } } HERE" placeholder="Email"/>
+                    <br />
+                    <input class="btn btn-primary" type="submit" name="updateEmail" value="Update" />
+                </form>
+            </div>
         </div>
 
     {% else %}
