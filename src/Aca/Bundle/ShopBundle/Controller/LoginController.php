@@ -73,22 +73,6 @@ class LoginController extends Controller {
     }
 
     /**
-     * Get a started session
-     * @return \Symfony\Component\HttpFoundation\Session\Session
-     */
-    /*public function getSession()
-    {
-        $session = $this->get('session');
-
-        if(!$session->isStarted()) {
-            $session->start();
-        }
-
-
-        return $session;
-    }*/
-
-    /**
      * Logout logic
      * @return RedirectResponse
      */

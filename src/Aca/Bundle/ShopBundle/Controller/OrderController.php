@@ -182,7 +182,103 @@ class OrderController extends Controller {
         // Get order details to show on page as receipt
         $order = $this->get('order')->getSessionOrder();
 
-        // Send email??
+
+        // Gather together html to put in body of email
+        $body = '
+            <html>
+                <head>
+                    <style>
+                        table.cart {
+                        margin: 0 auto;
+                        }
+
+                        tr.cart {
+                        border-bottom: 1px solid black;
+                        }
+
+                        .cart-name {
+                        width: 400px;
+                        font-weight: bold;
+                        font-size: 16px;
+                        }
+
+                        .cart-img {
+                        max-height: 100px;
+                        max-width: 120px;
+                        }
+
+                        .cart-img-container {
+                        width: 120px;
+                        height: 120px;
+                        display: table-cell;
+                        text-align: center;
+                        vertical-align: middle;
+                        }
+
+                        td.cart-spacer {
+                        height: 60px;
+                        width: 10px;
+                        }
+
+                        .cart-name-total {
+                        width: 400px;
+                        font-weight: bold;
+                        font-size: 24px;
+                        }
+                        .cart-price-total {
+                        font-weight: bold;
+                        font-size: 24px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <table class="cart">';
+
+        $totalPrice = 0;
+
+        foreach($order as $item) {
+            $itemTotal = $item['price'] * $item['quantity'];
+            $body .= '<tr class="cart">
+                        <td><div class="cart-img-container"><img class="cart-img" src="' . $item['image'] . '" /></div></td>
+                        <td class="cart-name">' . $item['name'] . '</td>
+                        <td class="cart-spacer"></td>
+                        <td>$' . $item['price'] . '</td>
+                        <td class="cart-spacer"></td>
+                        <td><i> x' . $item['quantity'] . '</i></td>
+                        <td class="cart-spacer"></td>
+                        <td class="cart-spacer"></td>
+                        <td><b>' . $itemTotal . '</b></td>
+                    </tr>';
+
+            $totalPrice += $itemTotal;
+        }
+
+        $body .= '
+                <tr>
+                    <td></td>
+                    <td class="cart-name-total">Total</td>
+                    <td class="cart-spacer"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cart-price-total">$' . $totalPrice . '</td>
+                </tr>
+            </table></body></html>';
+
+
+        // Send email
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Receipt For Your ACAShop Order')
+            ->setFrom('acashopemail@gmail.com')
+            ->setTo('jared.orion.selcoe@gmail.com')
+            ->setBody(
+                $body,
+                'text/html'
+            );
+
+        $this->get('mailer')->send($message);
 
 
         // Show thank you
@@ -194,5 +290,4 @@ class OrderController extends Controller {
             )
         );
     }
-
 }
