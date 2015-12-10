@@ -45,7 +45,7 @@ class OrderService {
      * Place order and clear cart
      * @throws \Simplon\Mysql\MysqlException
      */
-    public function placeOrder()
+    public function placeOrder($billingStreet, $billingCity, $billingState, $billingZip, $shippingStreet, $shippingCity, $shippingState, $shippingZip, $email)
     {
         $query = '
             SELECT
@@ -64,7 +64,16 @@ class OrderService {
             // Add order to order table
             $orderId = $this->db->insert('aca_order',
                 array(
-                    'user_id' => $this->session->get('user_id')
+                    'user_id' => $this->session->get('user_id'),
+                    'billing_street' => $billingStreet,
+                    'billing_city' => $billingCity,
+                    'billing_state' => $billingState,
+                    'billing_zip' => $billingZip,
+                    'shipping_street' => $shippingStreet,
+                    'shipping_city' => $shippingCity,
+                    'shipping_state' => $shippingState,
+                    'shipping_zip' => $shippingZip,
+                    'email' => $email
                 )
             );
 
@@ -90,7 +99,7 @@ class OrderService {
         }
     }
 
-    public function getSessionOrder()
+    public function getSessionOrderProducts()
     {
         $query = '
             SELECT
@@ -109,6 +118,21 @@ class OrderService {
               order_id= :orderId';
 
         $data = $this->db->fetchRowMany($query, array('orderId' => $this->session->get('order_id')));
+
+        return $data;
+    }
+
+    public function getSessionOrderDetails()
+    {
+        $query = '
+            SELECT
+              *
+            FROM
+              aca_order
+            WHERE
+              id= :orderId';
+
+        $data = $this->db->fetchrow($query, array('orderId' => $this->session->get('order_id')));
 
         return $data;
     }

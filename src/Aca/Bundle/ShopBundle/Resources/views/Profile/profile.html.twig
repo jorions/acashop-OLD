@@ -105,14 +105,14 @@
             </div>
             <div class="col-md-4">
                 <h3>EMAIL</h3>
-                {% if billingMsg %}
-                    <span class="profileMsg">{{ billingMsg }}</span>
+                {% if emailMsg %}
+                    <span class="profileMsg">{{ emailMsg }}</span>
                 {% else %}
                     <br />
                 {% endif %}
 
                 <form action="/profile" method="POST">
-                    <input class="profile" type="text" name="email" value="PUT { { EMAIL } } HERE" placeholder="Email"/>
+                    <input class="profile" type="text" name="email" value="{{ email }}" placeholder="Email"/>
                     <br />
                     <input class="btn btn-primary" type="submit" name="updateEmail" value="Update" />
                 </form>

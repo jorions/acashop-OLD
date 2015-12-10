@@ -30,6 +30,7 @@ class ProfileController extends Controller
             $nameMsg = null;
             $usernameMsg = null;
             $passwordMsg = null;
+            $emailMsg = null;
 
             $profile = $this->get('profile');
 
@@ -113,7 +114,7 @@ class ProfileController extends Controller
                     $billingMsg = 'Please enter a street, city, state, and zip';
                 }
 
-                // If profile page is visited not via POST (GET) it is a normal page visit, so set render variables accordingly
+            // If profile page is visited not via POST (GET) it is a normal page visit, so set render variables accordingly
             } else {
                 $data = $profile->getBillingAddress();
 
@@ -138,8 +139,6 @@ class ProfileController extends Controller
             $userInfo = $profile->getUserInfo();
             $name = $userInfo['name'];
             $username = $userInfo['username'];
-            //$password = $userInfo['password'];
-
 
             // Now check for if updateName button was pressed
             if ($req->getMethod() == 'POST' && !empty($req->get('updateName'))) {
@@ -250,13 +249,46 @@ class ProfileController extends Controller
                         $passwordMsg = 'Make sure your password contains only letters and numbers';
                     }
 
-                    // If one of the password fields was empty set error message
+                // If one of the password fields was empty set error message
                 } else {
 
                     $passwordMsg = 'Enter your new password in both boxes';
                 }
             }
 
+            // Now check if the updateEmail button was pressed
+            if ($req->getMethod() == 'POST' && !empty($req->get('updateEmail'))) {
+
+                $email = $req->get('email');
+
+                // Make sure info was entered
+                if (!empty($email)) {
+
+                    // Make sure email is valid
+                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                        $profile->updateEmail($email);
+                        $emailMsg = 'Email updated!';
+
+                    // If email is invalid set error message
+                    } else {
+
+                        $emailMsg = 'Invalid email entered';
+                    }
+
+
+                // If no email entered set error message
+                } else {
+
+                    $emailMsg = 'No new email entered';
+                }
+
+            // If profile page is visited not via POST (GET) it is a normal page visit, so set render variables accordingly
+            } else {
+
+                $email = $profile->getEmail();
+
+            }
 
             // Render the final page with all variables
             return $this->render(
@@ -278,6 +310,8 @@ class ProfileController extends Controller
                     'usernameMsg' => $usernameMsg,
                     'username' => $username,
                     'passwordMsg' => $passwordMsg,
+                    'email' => $email,
+                    'emailMsg' => $emailMsg
                 )
             );
 

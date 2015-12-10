@@ -34,8 +34,10 @@ class OrderController extends Controller {
         $loggedIn = $this->get('login')->loggedInCheck();
         $shippingMsg = null;
         $billingMsg = null;
+        $emailMsg = null;
         $shippingGood = FALSE;
         $billingGood = FALSE;
+        $emailGood = FALSE;
         $shippingStreet = null;
         $shippingCity = null;
         $shippingState = null;
@@ -44,6 +46,7 @@ class OrderController extends Controller {
         $billingCity = null;
         $billingState = null;
         $billingZip = null;
+        $email = null;
 
         // Get shipping address
         $address = $profile->getShippingAddress();
@@ -119,16 +122,54 @@ class OrderController extends Controller {
                 $billingGood = TRUE;
             }
 
-            // If all fields don't have content but review button was pressed set $billingMsg to error
+        // If all fields don't have content but review button was pressed set $billingMsg to error
         } else if(!empty($req->get('checkout_check'))) {
             $billingMsg = 'Please enter a street, city, state, and zip';
         }
 
 
-        // If check variables are true and submit button was pressed direct to thank you page
-        if($shippingGood && $billingGood && !empty($checkoutCheck)) {
+        // Get email
+        $email = $profile->getEmail();
 
-            return new RedirectResponse('place_order');
+        // Now that email may have been set, check if checkout button was pressed. If it was, populate render variables
+        // with request values. This way form fills are consistent between page submissions
+        if(!empty($checkoutCheck)) {
+
+            $email = $req->get('email');
+        }
+
+        // Perform validation checks on email
+        // Make sure email has content
+        if (!empty($email)) {
+
+            // If email is invalid set error accordingly
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                $emailMsg = 'Invalid email entered';
+
+            // If email is valid set check variable accordingly
+            } else {
+
+                $emailGood = TRUE;
+            }
+
+        // If no email entered but review button was pressed set $emailMsg error
+        } else if(!empty($req->get('checkout_check'))) {
+
+            $emailMsg = 'No email entered';
+        }
+
+
+        // If check variables are true and submit button was pressed submit order and redirect to thank you page
+        if($shippingGood && $billingGood && $emailGood && !empty($checkoutCheck)) {
+
+
+            // Place order
+            $order = $this->get('order');
+
+            $order->placeOrder($billingStreet, $billingCity, $billingState, $billingZip, $shippingStreet, $shippingCity, $shippingState, $shippingZip, $email);
+
+            return new RedirectResponse('thank_you');
 
         }
 
@@ -147,28 +188,14 @@ class OrderController extends Controller {
                 'billingStreet' => $billingStreet,
                 'billingCity' => $billingCity,
                 'billingState' => $billingState,
-                'billingZip' => $billingZip
+                'billingZip' => $billingZip,
+                'emailMsg' => $emailMsg,
+                'email' => $email
             )
         );
 
     }
 
-    public function placeOrderAction()
-    {
-
-        // If not logged in redirect to cart, which takes care of login check
-        if(!$this->get('login')->loggedInCheck()) {
-
-            return new RedirectResponse('/cart');
-        }
-
-
-        $order = $this->get('order');
-
-        $order->placeOrder();
-
-        return new RedirectResponse('thank_you');
-    }
 
     public function thankYouAction()
     {
@@ -179,74 +206,47 @@ class OrderController extends Controller {
             return new RedirectResponse('/cart');
         }
 
-        // Get order details to show on page as receipt
-        $order = $this->get('order')->getSessionOrder();
+        // Get order products to show on page as receipt
+        $orderProducts = $this->get('order')->getSessionOrderProducts();
+
+        // Get order details to show on page for receipt
+        $orderDetails = $this->get('order')->getSessionOrderDetails();
 
 
         // Gather together html to put in body of email
         $body = '
             <html>
-                <head>
-                    <style>
-                        table.cart {
-                        margin: 0 auto;
-                        }
-
-                        tr.cart {
-                        border-bottom: 1px solid black;
-                        }
-
-                        .cart-name {
-                        width: 400px;
-                        font-weight: bold;
-                        font-size: 16px;
-                        }
-
-                        .cart-img {
-                        max-height: 100px;
-                        max-width: 120px;
-                        }
-
-                        .cart-img-container {
-                        width: 120px;
-                        height: 120px;
-                        display: table-cell;
-                        text-align: center;
-                        vertical-align: middle;
-                        }
-
-                        td.cart-spacer {
-                        height: 60px;
-                        width: 10px;
-                        }
-
-                        .cart-name-total {
-                        width: 400px;
-                        font-weight: bold;
-                        font-size: 24px;
-                        }
-                        .cart-price-total {
-                        font-weight: bold;
-                        font-size: 24px;
-                        }
-                    </style>
-                </head>
                 <body>
-                    <table class="cart">';
+                    <h1>Your Order Details</h1>
+                    <h3>Shipped To</h3>'
+                    . $orderDetails['shipping_street'] . '<br />'
+                    . $orderDetails['shipping_city'] . ', ' . $orderDetails['shipping_state'] . ' ' . $orderDetails['shipping_zip'] . '<br /><br />
+                    <h3>Billed To</h3>'
+                    . $orderDetails['billing_street'] . '<br />'
+                    . $orderDetails['billing_city'] . ', ' . $orderDetails['billing_state'] . ' ' . $orderDetails['billing_zip'] . '<br /><br />
+                    <hr />
+                    <br />
+                    <h1>Your Purchased Products</h1>
+                    <table>';
 
         $totalPrice = 0;
 
-        foreach($order as $item) {
+        foreach($orderProducts as $item) {
             $itemTotal = $item['price'] * $item['quantity'];
-            $body .= '<tr class="cart">
-                        <td><div class="cart-img-container"><img class="cart-img" src="' . $item['image'] . '" /></div></td>
-                        <td class="cart-name">' . $item['name'] . '</td>
-                        <td class="cart-spacer"></td>
+            $body .= '
+                    <tr>
+                        <td>
+                            <div style="width:120px;height:120px;display:table-cell;text-align:center;vertical-align:middle;">
+                                <img style="max-height:100px;max-width:120px;" src="' . $item['image'] . '" />
+                            </div>
+                        </td>
+                        <td style="width:400px;font-weight:bold;font-size:16px;">' . $item['name'] . '</td>
+                        <td style="height:60px;width:10px;"></td>
                         <td>$' . $item['price'] . '</td>
-                        <td class="cart-spacer"></td>
+                        <td style="height:60px;width:10px;"></td>
                         <td><i> x' . $item['quantity'] . '</i></td>
-                        <td class="cart-spacer"></td>
-                        <td class="cart-spacer"></td>
+                        <td style="height:60px;width:10px;"></td>
+                        <td style="height:60px;width:10px;"></td>
                         <td><b>' . $itemTotal . '</b></td>
                     </tr>';
 
@@ -256,14 +256,14 @@ class OrderController extends Controller {
         $body .= '
                 <tr>
                     <td></td>
-                    <td class="cart-name-total">Total</td>
-                    <td class="cart-spacer"></td>
+                    <td style="width:400px;font-weight:bold;font-size:24px;">Total</td>
+                    <td style="height:60px;width:10px;"></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="cart-price-total">$' . $totalPrice . '</td>
+                    <td style="font-weight:bold;font-size:24px;">$' . $totalPrice . '</td>
                 </tr>
             </table></body></html>';
 
@@ -272,7 +272,7 @@ class OrderController extends Controller {
         $message = \Swift_Message::newInstance()
             ->setSubject('Receipt For Your ACAShop Order')
             ->setFrom('acashopemail@gmail.com')
-            ->setTo('jared.orion.selcoe@gmail.com')
+            ->setTo($orderDetails['email'])
             ->setBody(
                 $body,
                 'text/html'
@@ -286,7 +286,7 @@ class OrderController extends Controller {
             'AcaShopBundle:Order:thank.you.html.twig',
             array(
                 'loggedIn' => $this->get('login')->loggedInCheck(),
-                'order' => $order
+                'order' => $orderProducts
             )
         );
     }

@@ -233,4 +233,27 @@ class ProfileService {
 
         return array();
     }
+
+
+    public function updateEmail($newEmail)
+    {
+        $this->db->update('aca_user', array('id' => $this->session->get('user_id')), array('email' => $newEmail));
+    }
+
+    public function getEmail()
+    {
+        // Get user info
+        $data = $this->getUserInfo();
+
+        // Get email array
+        $email = $data['email'];
+
+        // If email is set, return email
+        if(!empty($email)) {
+
+            return $email;
+        }
+
+        return null;
+    }
 }

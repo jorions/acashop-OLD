@@ -51,7 +51,7 @@
     <form action="/review_order" method="POST">
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h3 class="centered">SHIPPING</h3>
                 {% if shippingMsg %}
                     <span class="profileMsg">{{ shippingMsg }}</span>
@@ -68,7 +68,7 @@
                     <input class="profile" type="text" name="shippingZip" value="{{ shippingZip }}" placeholder="Zip"/>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h3 class="centered">BILLING</h3>
                 {% if billingMsg %}
                     <span class="profileMsg">{{ billingMsg }}</span>
@@ -83,6 +83,17 @@
                     <input class="profile" type="text" name="billingState" value="{{ billingState }}" placeholder="State"/>
                     <br />
                     <input class="profile" type="text" name="billingZip" value="{{ billingZip }}" placeholder="Zip"/>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h3 class="centered">EMAIL</h3>
+                {% if emailMsg %}
+                    <span class="profileMsg">{{ emailMsg }}</span>
+                {% else %}
+                    <br />
+                {% endif %}
+                <div class="centered">
+                    <input class="profile" type="text" name="email" value="{{ email }}" placeholder="Email"/>
                 </div>
             </div>
         </div>

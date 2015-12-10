@@ -87,11 +87,6 @@ aca_order_review_route:
     defaults: {_controller: AcaShopBundle:Order:reviewOrder }
     methods: [GET, POST]
 
-aca_place_order_route:
-    path: /place_order
-    defaults: {_controller: AcaShopBundle:Order:placeOrder }
-    methods: [GET]
-
 aca_order_thank_you_route:
     path: /thank_you
     defaults: {_controller: AcaShopBundle:Order:thankYou }
