@@ -90,14 +90,6 @@ class CartService
     public function getCart()
     {
 
-        /*$query = "
-            SELECT
-              *
-            FROM
-              aca_cart_product
-            WHERE
-              cart_id = :cartId";*/
-
         $query = "
             SELECT
               p.id as p_id,
@@ -141,9 +133,6 @@ class CartService
         $price = $data['price'];
 
         // Insert item into aca_cart_product table
-        // ??? IS THIS HOW WE SHOULD IMPLEMENT THE TRY/CATCH? OR SHOULD I CATCH THE MYSQLEXCEPTION INSTEAD?
-        // ??? WHERE IN ALL OF THIS SHOULD WE BE TRYING TO TRY/CATCH? THERE ARE SO MANY INTERDEPENDENCIES EVERYWHERE THAT IT SEEMS LIKE MOST OF MY CODE SHOULD HAVE TRY/CATCH
-        // ??? FIGURE IT OUT, THEN IMPLEMENT ON removeProduct() AND updateProduct()
         try {
             $this->db->insert('aca_cart_product', array('cart_id' => $this->getCartId(), 'product_id' => $productId, 'price' => $price, 'quantity' => $quantity));
         } catch (\Exception $e) {

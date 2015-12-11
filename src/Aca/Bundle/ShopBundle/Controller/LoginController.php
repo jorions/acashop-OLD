@@ -189,7 +189,7 @@ class LoginController extends Controller {
                 $loggedIn = true;
 
                 // Set and save session values
-                $login->setSession($loggedIn, $name, $username, $password, $userId);;
+                $login->setSession($loggedIn, $name, $username, $password, $userId);
 
                 // Set up shopping cart
                 $cart = $this->get('cart');

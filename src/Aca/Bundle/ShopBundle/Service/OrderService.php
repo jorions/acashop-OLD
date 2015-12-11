@@ -99,6 +99,10 @@ class OrderService {
         }
     }
 
+    /**
+     * Get array of all products for a given order
+     * @return array|null
+     */
     public function getSessionOrderProducts()
     {
         $query = '
@@ -122,6 +126,10 @@ class OrderService {
         return $data;
     }
 
+    /**
+     * Get array of order details such as shipping and billing data
+     * @return array|null
+     */
     public function getSessionOrderDetails()
     {
         $query = '

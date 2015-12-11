@@ -34,12 +34,24 @@ class ProfileService {
     }
 
 
+    /**
+     * Return the current session
+     * @return Session
+     */
     public function getSession()
     {
 
         return $this->session;
     }
 
+    /**
+     * Add shipping address to user profile
+     * @param string $street
+     * @param string $city
+     * @param string $state
+     * @param int $zip
+     * @throws \Simplon\Mysql\MysqlException
+     */
     public function setShippingAddress($street, $city, $state, $zip)
     {
 
@@ -69,6 +81,14 @@ class ProfileService {
         $this->checkIfAddressUsed($originalAddressId);
     }
 
+    /**
+     * Add billing address to user profile
+     * @param string $street
+     * @param string $city
+     * @param string $state
+     * @param int $zip
+     * @throws \Simplon\Mysql\MysqlException
+     */
     public function setBillingAddress($street, $city, $state, $zip)
     {
         // Get original billing address id so that if we update the address, we can check for if the address is still being used elsewhere after updating
@@ -96,6 +116,10 @@ class ProfileService {
         $this->checkIfAddressUsed($originalAddressId);
     }
 
+    /**
+     * Determine if a given address is used elsewhere and remove it if it isn't
+     * @param int $addressId
+     */
     public function checkIfAddressUsed($addressId)
     {
         // If original address ID existed, check for it being used elsewhere
@@ -120,6 +144,10 @@ class ProfileService {
         }
     }
 
+    /**
+     * Get all of the data associated with a specific user
+     * @return array|null
+     */
     public function getUserInfo()
     {
         $query = '
@@ -133,7 +161,10 @@ class ProfileService {
         return $this->db->fetchRow($query, array('userId' => $this->session->get('user_id')));
     }
 
-
+    /**
+     * Get a user's shipping address
+     * @return array|null
+     */
     public function getShippingAddress()
     {
         // Get user info
@@ -148,10 +179,13 @@ class ProfileService {
             return $address;
         }
 
-        return array();
+        return null;
     }
 
-
+    /**
+     * Get a user's billing address
+     * @return array|null
+     */
     public function getBillingAddress()
     {
         // Get user info
@@ -166,9 +200,14 @@ class ProfileService {
             return $address;
         }
 
-        return array();
+        return null;
     }
 
+    /**
+     * Update a user's name
+     * @param string $newName
+     * @throws \Simplon\Mysql\MysqlException
+     */
     public function updateName($newName)
     {
         $this->db->update('aca_user', array('id' => $this->session->get('user_id')), array('name' => $newName));
@@ -176,6 +215,11 @@ class ProfileService {
         $this->session->set('name', $newName);
     }
 
+    /**
+     * Update a user's username
+     * @param string $newName
+     * @throws \Simplon\Mysql\MysqlException
+     */
     public function updateUsername($newName)
     {
         $this->db->update('aca_user', array('id' => $this->session->get('user_id')), array('username' => $newName));
@@ -183,6 +227,11 @@ class ProfileService {
         $this->session->set('username', $newName);
     }
 
+    /**
+     * Updated a user's password
+     * @param string $newPass
+     * @throws \Simplon\Mysql\MysqlException
+     */
     public function updatePassword($newPass)
     {
         $this->db->update('aca_user', array('id' => $this->session->get('user_id')), array('password' => $newPass));
@@ -190,6 +239,14 @@ class ProfileService {
         $this->session->set('password', $newPass);
     }
 
+    /**
+     * Get an address ID based on a given address
+     * @param string $street
+     * @param string $city
+     * @param string $state
+     * @param int $zip
+     * @return int
+     */
     public function getAddressId($street, $city, $state, $zip)
     {
 
@@ -214,6 +271,11 @@ class ProfileService {
         return 0;
     }
 
+    /**
+     * Get an address based on an address ID
+     * @param int $addressId
+     * @return array|null
+     */
     public function getAddress($addressId)
     {
         $query = '
@@ -231,15 +293,23 @@ class ProfileService {
             return $data;
         }
 
-        return array();
+        return null;
     }
 
-
+    /**
+     * Updated a user's email
+     * @param string $newEmail
+     * @throws \Simplon\Mysql\MysqlException
+     */
     public function updateEmail($newEmail)
     {
         $this->db->update('aca_user', array('id' => $this->session->get('user_id')), array('email' => $newEmail));
     }
 
+    /**
+     * Return a user's email
+     * @return string|null
+     */
     public function getEmail()
     {
         // Get user info

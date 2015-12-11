@@ -39,10 +39,22 @@ class LoginService {
         }
     }
 
+    /**
+     * Return the current session
+     * @return Session
+     */
     public function getSession() {
         return $this->session;
     }
 
+    /**
+     * Set all core session variables
+     * @param bool $loggedIn
+     * @param string $name
+     * @param string $username
+     * @param string $password
+     * @param int $userId
+     */
     public function setSession($loggedIn, $name, $username, $password, $userId)
     {
 
@@ -57,6 +69,12 @@ class LoginService {
         $this->session->save();
     }
 
+    /**
+     * Determine if the entered login is valid
+     * @param string $username
+     * @param string $password
+     * @return bool
+     */
     public function checkLogin($username, $password)
     {
         $query = "
@@ -100,6 +118,11 @@ class LoginService {
         }
     }
 
+    /**
+     * Determine if the proposed username is already used
+     * @param string $username
+     * @return bool
+     */
     public function checkRegistration($username)
     {
 
@@ -123,6 +146,9 @@ class LoginService {
 
     }
 
+    /**
+     * Remove all session variables upon logout
+     */
     public function logout()
     {
 
@@ -135,6 +161,10 @@ class LoginService {
         $this->session->save();
     }
 
+    /**
+     * Determine if user is logged in
+     * @return bool
+     */
     public function loggedInCheck()
     {
         if($this->session->get('loggedIn') != true) {
