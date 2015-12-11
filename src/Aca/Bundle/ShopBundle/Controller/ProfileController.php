@@ -15,6 +15,11 @@ use Aca\Bundle\ShopBundle\Service\LoginService;
 class ProfileController extends Controller
 {
 
+    /**
+     * Provide all logic for rendering and interacting with profile page
+     * @param Request $req
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function profilePageAction(Request $req)
     {
 

@@ -11,6 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends Controller {
 
+    /**
+     * Provide page to review order and then submit order
+     * @param Request $req
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function reviewOrderAction(Request $req)
     {
 
@@ -196,7 +201,10 @@ class OrderController extends Controller {
 
     }
 
-
+    /**
+     * Generate email to send to user and direct user to thank you page
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function thankYouAction()
     {
 
