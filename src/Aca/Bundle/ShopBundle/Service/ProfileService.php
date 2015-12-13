@@ -152,16 +152,113 @@ class ProfileService {
         }
     }
 
+    /**
+     * Determine if a new proposed address can be updated, provide status message, and if address is valid conduct update
+     * @param string $street
+     * @param string $city
+     * @param string $state
+     * @param int $zip
+     * @return null|string
+     */
+    public function checkShippingAddress($street, $city, $state, $zip)
+    {
+
+        $msg = null;
+
+        // Make sure all fields have content
+        if (!empty($street) && !empty($city) && !empty($state) && !empty($zip)) {
+
+            // Make sure zip is valid
+            if (preg_match("#^[0-9]+$#", $zip)) {
+
+                // Make sure the new address is different from the old address
+                $data = $this->getShippingAddress();
+                if ($street != $data['street'] || $city != $data['city'] || $state != $data['state'] || $zip != $data['zip']) {
+
+                    // With all checks set, update shipping
+                    $this->setShippingAddress($street, $city, $state, $zip);
+                    $msg = 'Shipping address updated!';
+
+                // If new address is same as current one tell user
+                } else {
+
+                    $msg = 'That\'s your current address!';
+                }
+
+            // If zip is invalid set error message
+            } else {
+
+                $msg = 'Please enter only numbers for zip';
+            }
+
+        // If all fields don't have content set error message
+        } else {
+
+            $msg = 'Please enter a street, city, state, and zip';
+        }
+
+        return $msg;
+    }
+
+
+    /**
+     * Determine if a new proposed address can be updated, provide status message, and if address is valid conduct update
+     * @param string $street
+     * @param string $city
+     * @param string $state
+     * @param int $zip
+     * @return null|string
+     */
+    public function checkBillingAddress($street, $city, $state, $zip)
+    {
+
+        $msg = null;
+
+        // Make sure all fields have content
+        if (!empty($street) && !empty($city) && !empty($state) && !empty($zip)) {
+
+            // Make sure zip is valid
+            if (preg_match("#^[0-9]+$#", $zip)) {
+
+                // Make sure the new address is different from the old address
+                $data = $this->getBillingAddress();
+                if ($street != $data['street'] || $city != $data['city'] || $state != $data['state'] || $zip != $data['zip']) {
+
+                    // With all checks set, update shipping
+                    $this->setBillingAddress($street, $city, $state, $zip);
+                    $msg = 'Billing address updated!';
+
+                    // If new address is same as current one tell user
+                } else {
+
+                    $msg = 'That\'s your current address!';
+                }
+
+                // If zip is invalid set error message
+            } else {
+
+                $msg = 'Please enter only numbers for zip';
+            }
+
+            // If all fields don't have content set error message
+        } else {
+
+            $msg = 'Please enter a street, city, state, and zip';
+        }
+
+        return $msg;
+    }
+
 
     /**
      * Determine if a new proposed name can be updated, provide status message, and if name is valid conduct update
-     * @param string $name - new name to check against db
+     * @param string $name
      * @return null|string
      */
     public function checkName($name)
     {
 
-        $nameMsg = null;
+        $msg = null;
 
         // Make sure info was entered
         if (!empty($name)) {
@@ -174,38 +271,38 @@ class ProfileService {
 
                     // Set new name
                     $this->updateName($name);
-                    $nameMsg = 'Name updated!';
+                    $msg = 'Name updated!';
 
                 // If new name is same as current name tell user
                 } else {
 
-                    $nameMsg = 'That\'s your current name!';
+                    $msg = 'That\'s your current name!';
                 }
 
             // If any illegal characters tell user
             } else {
-                $nameMsg = 'Make sure your name contains only letters and numbers';
+                $msg = 'Make sure your name contains only letters and numbers';
             }
 
         // If name empty set error message
         } else {
 
-            $nameMsg = 'No new name entered';
+            $msg = 'No new name entered';
         }
 
-        return $nameMsg;
+        return $msg;
     }
 
 
     /**
      * Determine if a new proposed username can be updated, provide status message, and if username is valid conduct update
-     * @param string $username - new username to check against db
+     * @param string $username
      * @return null|string
      */
     public function checkUsername($username)
     {
 
-        $usernameMsg = null;
+        $msg = null;
 
         // Make sure info was entered
         if (!empty($username)) {
@@ -218,31 +315,31 @@ class ProfileService {
 
                     // Set new username
                     $this->updateUsername($username);
-                    $usernameMsg = 'Username updated!';
+                    $msg = 'Username updated!';
 
                 // If username is same as original tell user (instead of giving error message)
                 } else if ($this->getUsername() == $username) {
 
-                    $usernameMsg = 'That\'s your current username!';
+                    $msg = 'That\'s your current username!';
 
                 // If username already exists tell user
                 } else {
 
-                    $usernameMsg = 'That username is already taken - sorry!';
+                    $msg = 'That username is already taken - sorry!';
                 }
 
             // If any illegal characters tell user
             } else {
-                $usernameMsg = 'Make sure your username contains only letters and numbers';
+                $msg = 'Make sure your username contains only letters and numbers';
             }
 
         // If username empty set error message
         } else {
 
-            $usernameMsg = 'No new username entered';
+            $msg = 'No new username entered';
         }
 
-        return $usernameMsg;
+        return $msg;
     }
 
     /**
@@ -254,7 +351,7 @@ class ProfileService {
     public function checkPassword($password, $passwordCheck)
     {
 
-        $passwordMsg = null;
+        $msg = null;
 
         // Make sure info was entered
         if (!empty($password) && !empty($passwordCheck)) {
@@ -267,38 +364,39 @@ class ProfileService {
 
                     // Set new password
                     $this->updatePassword($password);
-                    $passwordMsg = 'Password updated!';
+                    $msg = 'Password updated!';
 
                 // If passwords don't match tell user
                 } else {
 
-                    $passwordMsg = 'Make sure your new password matches in both boxes';
+                    $msg = 'Make sure your new password matches in both boxes';
                 }
 
             // If any illegal characters tell user
             } else {
 
-                $passwordMsg = 'Make sure your password contains only letters and numbers';
+                $msg = 'Make sure your password contains only letters and numbers';
             }
 
         // If one of the password fields was empty set error message
         } else {
 
-            $passwordMsg = 'Enter your new password in both boxes';
+            $msg = 'Enter your new password in both boxes';
         }
 
-        return $passwordMsg;
+        return $msg;
     }
 
 
     /**
+     * Determine if a new proposed email can be updated, provide status message, and if email is valid conduct update
      * @param string $email
      * @return null|string
      */
     public function checkEmail($email)
     {
 
-        $emailMsg = null;
+        $msg = null;
 
         // Make sure info was entered
         if (!empty($email)) {
@@ -309,28 +407,29 @@ class ProfileService {
                 // If email is same as original tell user
                 if ($this->getEmail() == $email) {
 
-                    $emailMsg = 'That\'s your current email!';
+                    $msg = 'That\'s your current email!';
 
+                // With all checks complete update email
                 } else {
 
                     $this->updateEmail($email);
-                    $emailMsg = 'Email updated!';
+                    $msg = 'Email updated!';
 
                 }
 
             // If email is invalid set error message
             } else {
 
-                $emailMsg = 'Invalid email entered';
+                $msg = 'Invalid email entered';
             }
 
         // If no email entered set error message
         } else {
 
-            $emailMsg = 'No new email entered';
+            $msg = 'No new email entered';
         }
 
-        return $emailMsg;
+        return $msg;
     }
 
     /**
