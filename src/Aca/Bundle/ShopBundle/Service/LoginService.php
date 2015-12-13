@@ -21,12 +21,6 @@ class LoginService {
      */
     protected $session;
 
-    /**
-     * Cart class
-     * @var CartService
-     */
-    protected $cart;
-
 
     public function __construct(Mysql $db, Session $session)
     {
@@ -77,45 +71,46 @@ class LoginService {
      */
     public function checkLogin($username, $password)
     {
-        $query = "
-            SELECT
-                *
-            FROM
-                aca_user
-            WHERE
-                username= :username
-                and password= :password";
 
-        $data = $this->db->fetchRow($query, array('username' => $username, 'password' => $password));
+        $msg = null;
 
-        // Valid login
-        if (!empty($data)) {
 
-            // Get user's name from returned query
-            $name = $data['name'];
-            $id = $data['id'];
+        // If any fields are left empty tell user
+        if (empty($username) || empty($password)) {
 
-            // Set session variables
-            $this->session->set('loggedIn', true);
-            $this->session->set('name', $name);
-            $this->session->set('username', $username);
-            $this->session->set('password', $password);
-            $this->session->set('user_id', $id);
+            $msg = 'Please make sure you enter a username and password';
 
-            // Before you can run any operations on $session you have to save it
-            $this->session->save();
-
-            return true;
-
-        // Invalid login
+        // If all fields have data check login
         } else {
-            $this->session->set('loggedIn', false);
 
-            // Before you can run any operations on $session you have to save it
-            $this->session->save();
+            $query = "
+                SELECT
+                    *
+                FROM
+                    aca_user
+                WHERE
+                    username= :username
+                    and password= :password";
 
-            return false;
+            $data = $this->db->fetchRow($query, array('username' => $username, 'password' => $password));
+
+            // If invalid login set session variables
+            if (empty($data)) {
+
+                $this->session->set('loggedIn', false);
+                $this->session->save();
+
+                $msg = 'Please check your credentials';
+
+            // If valid login set session variables
+            } else {
+
+                $this->setSession(true, $data['name'], $username, $password, $data['id']);
+            }
         }
+
+        return $msg;
+
     }
 
     /**
@@ -123,7 +118,7 @@ class LoginService {
      * @param string $username
      * @return bool
      */
-    public function checkRegistration($username)
+    public function registrationIsNew($username)
     {
 
         $query = "
@@ -144,6 +139,57 @@ class LoginService {
         // Username already exists
         return false;
 
+    }
+
+    /**
+     * Determine if a new proposed user profile can be created, provide status message, and if info is valid create new user
+     * @param $username
+     * @param $password
+     * @param $passwordCheck
+     * @param $name
+     * @return null|string
+     * @throws \Simplon\Mysql\MysqlException
+     */
+    public function checkRegistration($username, $password, $passwordCheck, $name)
+    {
+
+        $msg = null;
+
+        // If some fields are left empty tell user
+        if (empty($username) || empty($password) || empty($passwordCheck) || empty($name)) {
+
+            $msg = 'Please make sure you have entered information in all fields';
+
+        // Prevent MySQL injection - if anything uses illegal characters, tell user
+        } else if (!preg_match("#^[a-zA-Z0-9]+$#", $username) || !preg_match("#^[a-zA-Z0-9]+$#", $password) || !preg_match("#^[a-zA-Z0-9]+$#", $passwordCheck) || !preg_match("#^[a-zA-Z0-9]+$#", $name)) {
+
+            $msg = 'Make sure everything contains only numbers and letters';
+
+        // Now that we know there is no MySQL injection, query DB to make sure login doesn't already exist
+        } else if (!$this->registrationIsNew($username)) {
+
+            $msg = 'That username already exists - please try another';
+
+        // Login does not exist but password was entered improperly
+        } else if ($password != $passwordCheck) {
+
+            $msg = 'Please make sure you properly entered your password in both fields';
+
+        // Login does not exist and password was entered properly
+        } else {
+
+            // Create new user
+            $userId = $this->db->insert('aca_user', array('name' => $name, 'username' => $username, 'password' => $password));
+
+            // Set render array variable now that user credentials have been created
+            $loggedIn = true;
+
+            // Set and save session values
+            $this->setSession($loggedIn, $name, $username, $password, $userId);
+
+        }
+
+        return $msg;
     }
 
     /**

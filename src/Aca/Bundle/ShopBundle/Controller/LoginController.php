@@ -31,26 +31,18 @@ class LoginController extends Controller {
         $username = $req->get('username');
         $password = $req->get('password');
 
-        if (!empty($username) && !empty($password)) {
+       if ($req->getMethod() == 'POST') {
 
-            // Invalid login
-            if(!$login->checkLogin($username, $password)){
-                $msg = 'Please check your credentials';
-
-            // Valid login
-            } else {
-                // Set up shopping cart
-                $cart = $this->get('cart');
-                $cart->getCartId();
-            }
-
-        // If the form isn't fully filled out but has been submitted
-        } else if($req->getMethod() == 'POST') {
-
-            $msg = 'Please make sure you enter a username and password';
-        }
+           $msg = $login->checkLogin($username, $password);
+       }
 
         $loggedIn = $session->get('loggedIn');
+
+        // If logged in set up new cart (can't put this in checkLogin because the cart service can only be used once logged in)
+        if ($loggedIn) {
+
+            $this->get('cart');
+        }
 
         // If you "get" something that doesn't exist then it will be created with a null value (this is for if login was invalid)
         $name = $session->get('name');
@@ -90,143 +82,48 @@ class LoginController extends Controller {
      */
     public function registrationAction(Request $req) {
 
-        // Set up DB
-        $db = $this->get('acadb');
-
         // Get or start a session
         $login = $this->get('login');
         $session = $login->getSession();
 
         // Set variables to check for form entry
-        $loggedIn = $session->get('loggedIn');
         $name = $req->get('name');
         $msg = null;
         $username = $req->get('username');
         $password = $req->get('password');
         $passwordCheck = $req->get('passwordCheck');
 
-        // If already logged on just render page with "Welcome" message
-        if($loggedIn == true) {
-            return $this->render(
-                'AcaShopBundle:LoginForm:registration.html.twig',
-                array(
-                    'loggedIn' => true,
-                    'name' => $session->get('name'),
-                    'msg' => $msg,
-                    'username' => $session->get('username'),
-                    'password' => $session->get('password'),
-                    'user_id' => $session->get('user_id')
-                )
-            );
-        }
+        // If loggedIn is empty set it to false
+        if(empty($session->get('loggedIn'))) {
 
-        // Check for form entry
-        // If values in all fields and submit button was pressed, check for illegal characters
-        if (!empty($username) && !empty($password) && !empty($passwordCheck) && !empty($name) && $req->getMethod() == 'POST') {
-
-            // Prevent MySQL injection - if anything uses illegal characters, tell user
-            if(!preg_match("#^[a-zA-Z0-9]+$#", $username) || !preg_match("#^[a-zA-Z0-9]+$#", $password) || !preg_match("#^[a-zA-Z0-9]+$#", $passwordCheck) || !preg_match("#^[a-zA-Z0-9]+$#", $name)) {
-
-                // Set error message
-                $msg = 'Make sure everything contains only numbers and letters';
-
-                // Set session variable
-                $loggedIn = false;
-                $session->set('loggedIn', $loggedIn);
-                $session->save();
-
-                // Return the rendered twig
-                return $this->render(
-                    'AcaShopBundle:LoginForm:registration.html.twig',
-                    array(
-                        'loggedIn' => $loggedIn,
-                        'name' => $name,
-                        'msg' => $msg,
-                        'username' => $username,
-                        'password' => $password,
-                        'passwordCheck' => $passwordCheck
-                    )
-                );
-            }
-
-            // Now that we know there is no MySQL injection, query DB
-            // Login already exists
-            if (!$login->checkRegistration($username) && $req->getMethod() == 'POST') {
-
-                // Set error message
-                $msg = 'That username already exists - please try another';
-
-                // Set session variable
-                $loggedIn = false;
-                $session->set('loggedIn', $loggedIn);
-
-            // Login does not exist
-            } else {
-
-                // Make sure password was entered properly in both fields
-                if ($password != $passwordCheck) {
-
-                    $msg = 'Please make sure you properly entered your password in both fields';
-
-                    return $this->render(
-                        'AcaShopBundle:LoginForm:registration.html.twig',
-                        array(
-                            'loggedIn' => $loggedIn,
-                            'name' => $name,
-                            'msg' => $msg,
-                            'username' => $username,
-                            'password' => $password,
-                            'passwordCheck' => $passwordCheck
-                        )
-                    );
-                }
-
-
-                // Create new user
-                $userId = $db->insert('aca_user', array('name' => $name, 'username' => $username, 'password' => $password));
-
-                // Set render array variable now that user credentials have been created
-                $loggedIn = true;
-
-                // Set and save session values
-                $login->setSession($loggedIn, $name, $username, $password, $userId);
-
-                // Set up shopping cart
-                $cart = $this->get('cart');
-                $cart->getCartId();
-
-                // Return the rendered twig
-                return $this->render(
-                    'AcaShopBundle:LoginForm:login.html.twig',
-                    array(
-                        'loggedIn' => $loggedIn,
-                        'name' => $name,
-                        'msg' => $msg,
-                        'username' => $username,
-                        'password' => $password,
-                        'passwordCheck' => $passwordCheck
-                    )
-                );
-            }
-
-        // Form entry error
-        } else if($loggedIn != true && $req->getMethod() == 'POST') {
-
-            $msg = 'Please make sure you have entered information in all fields';
             $session->set('loggedIn', false);
+
+            // Before you can run any operations on $session you have to save it
+            $session->save();
         }
 
-        // Before you can run any operations on $session you have to save it
-        $session->save();
 
-        // Set render array variables now that user credentials have been created
-        $loggedIn = $session->get('loggedIn');
+        // If POST then submit button was pressed
+        if($req->getMethod() == 'POST') {
+
+            $msg = $login->checkRegistration($username, $password, $passwordCheck, $name);
+
+        }
+
+
+        // If logged in set up new cart (can't put this in checkRegistration because the cart service can only be used once logged in)
+        if ($session->get('loggedIn')) {
+
+            $this->get('cart');
+
+        }
+
 
         // Return the rendered twig
         return $this->render(
             'AcaShopBundle:LoginForm:registration.html.twig',
             array(
-                'loggedIn' => $loggedIn,
+                'loggedIn' => $session->get('loggedIn'),
                 'name' => $name,
                 'msg' => $msg,
                 'username' => $username,

@@ -37,6 +37,7 @@ class ProfileController extends Controller
             );
         }
 
+
         // Set initial error messages to null
         $shippingMsg = null;
         $billingMsg = null;
@@ -55,6 +56,7 @@ class ProfileController extends Controller
             $shippingMsg = $profile->checkShippingAddress($req->get('shippingStreet'), $req->get('shippingCity'), $req->get('shippingState'), $req->get('shippingZip'));
 
         }
+
 
         // Now check for if updateBilling button was pressed
         if ($req->getMethod() == 'POST' && !empty($req->get('updateBilling'))) {
@@ -91,7 +93,7 @@ class ProfileController extends Controller
         }
 
 
-        // Now check if the updateEmail button was pressed
+        // Now check if updateEmail button was pressed
         if ($req->getMethod() == 'POST' && !empty($req->get('updateEmail'))) {
 
             // Check email from form against email in database, updated accordingly in db, and return message
@@ -103,6 +105,7 @@ class ProfileController extends Controller
         // Set all render variables
         $name = $profile->getName();
         $username = $profile->getUsername();
+        $email = $profile->getEmail();
 
         // If there is a shipping address, set variables accordingly
         $data = $profile->getShippingAddress();
@@ -111,7 +114,6 @@ class ProfileController extends Controller
             $shippingCity = $data['city'];
             $shippingState = $data['state'];
             $shippingZip = $data['zip'];
-
         // If there is no shipping address, set variables to empty
         } else {
             $shippingStreet = null;
@@ -127,7 +129,6 @@ class ProfileController extends Controller
             $billingCity = $data['city'];
             $billingState = $data['state'];
             $billingZip = $data['zip'];
-
         // If there is no billing address, set variables to empty
         } else {
             $billingStreet = null;
@@ -135,9 +136,6 @@ class ProfileController extends Controller
             $billingState = null;
             $billingZip = null;
         }
-
-        $email = $profile->getEmail();
-
 
 
         // Render the final page with all variables

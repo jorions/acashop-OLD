@@ -94,16 +94,17 @@ class ProductsController extends Controller {
                     }
                 }
             }
-                // Product page with no error
-                return $this->render(
-                    'AcaShopBundle:Products:product.page.html.twig',
-                    array(
-                        'product' => $data,
-                        'error' => false,
-                        'alreadyInCart' => $alreadyInCart,
-                        'loggedIn' => $loggedIn
-                    )
-                );
+
+            // Product page with no error
+            return $this->render(
+                'AcaShopBundle:Products:product.page.html.twig',
+                array(
+                    'product' => $data,
+                    'error' => false,
+                    'alreadyInCart' => $alreadyInCart,
+                    'loggedIn' => $loggedIn
+                )
+            );
 
         } else {
 
