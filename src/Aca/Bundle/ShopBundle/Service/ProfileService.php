@@ -22,11 +22,19 @@ class ProfileService {
      */
     protected $session;
 
-    public function __construct(Mysql $db, Session $session)
+    /**
+     * Login features
+     * @var LoginService
+     */
+    protected $login;
+
+    public function __construct(Mysql $db, Session $session, LoginService $login)
     {
         $this->db = $db;
 
         $this->session = $session;
+
+        $this->login = $login;
 
         if(!$this->session->isStarted()) {
             $this->session->start();
@@ -144,6 +152,187 @@ class ProfileService {
         }
     }
 
+
+    /**
+     * Determine if a new proposed name can be updated, provide status message, and if name is valid conduct update
+     * @param string $name - new name to check against db
+     * @return null|string
+     */
+    public function checkName($name)
+    {
+
+        $nameMsg = null;
+
+        // Make sure info was entered
+        if (!empty($name)) {
+
+            // Prevent MySQL injection - make sure all characters are legal
+            if (preg_match("#^[a-zA-Z0-9]+$#", $name)) {
+
+                // Make sure new name is different than current name
+                if ($this->getName() != $name) {
+
+                    // Set new name
+                    $this->updateName($name);
+                    $nameMsg = 'Name updated!';
+
+                // If new name is same as current name tell user
+                } else {
+
+                    $nameMsg = 'That\'s your current name!';
+                }
+
+            // If any illegal characters tell user
+            } else {
+                $nameMsg = 'Make sure your name contains only letters and numbers';
+            }
+
+        // If name empty set error message
+        } else {
+
+            $nameMsg = 'No new name entered';
+        }
+
+        return $nameMsg;
+    }
+
+
+    /**
+     * Determine if a new proposed username can be updated, provide status message, and if username is valid conduct update
+     * @param string $username - new username to check against db
+     * @return null|string
+     */
+    public function checkUsername($username)
+    {
+
+        $usernameMsg = null;
+
+        // Make sure info was entered
+        if (!empty($username)) {
+
+            // Prevent MySQL injection - make sure all characters are legal
+            if (preg_match("#^[a-zA-Z0-9]+$#", $username)) {
+
+                // Make sure username isn't already used
+                if ($this->login->checkRegistration($username)) {
+
+                    // Set new username
+                    $this->updateUsername($username);
+                    $usernameMsg = 'Username updated!';
+
+                // If username is same as original tell user (instead of giving error message)
+                } else if ($this->getUsername() == $username) {
+
+                    $usernameMsg = 'That\'s your current username!';
+
+                // If username already exists tell user
+                } else {
+
+                    $usernameMsg = 'That username is already taken - sorry!';
+                }
+
+            // If any illegal characters tell user
+            } else {
+                $usernameMsg = 'Make sure your username contains only letters and numbers';
+            }
+
+        // If username empty set error message
+        } else {
+
+            $usernameMsg = 'No new username entered';
+        }
+
+        return $usernameMsg;
+    }
+
+    /**
+     * Determine if a new proposed password can be updated, provide status message, and if password is valid conduct update
+     * @param string $password - proposed new user password
+     * @param string $passwordCheck - retyped user password to compare against first typed password
+     * @return null|string
+     */
+    public function checkPassword($password, $passwordCheck)
+    {
+
+        $passwordMsg = null;
+
+        // Make sure info was entered
+        if (!empty($password) && !empty($passwordCheck)) {
+
+            // Prevent MySQL injection - make sure all characters are legal
+            if (preg_match("#^[a-zA-Z0-9]+$#", $password) && preg_match("#^[a-zA-Z0-9]+$#", $passwordCheck)) {
+
+                // Make sure passwords match
+                if ($password == $passwordCheck) {
+
+                    // Set new password
+                    $this->updatePassword($password);
+                    $passwordMsg = 'Password updated!';
+
+                // If passwords don't match tell user
+                } else {
+
+                    $passwordMsg = 'Make sure your new password matches in both boxes';
+                }
+
+            // If any illegal characters tell user
+            } else {
+
+                $passwordMsg = 'Make sure your password contains only letters and numbers';
+            }
+
+        // If one of the password fields was empty set error message
+        } else {
+
+            $passwordMsg = 'Enter your new password in both boxes';
+        }
+
+        return $passwordMsg;
+    }
+
+
+    /**
+     * @param string $email
+     * @return null|string
+     */
+    public function checkEmail($email)
+    {
+
+        $emailMsg = null;
+
+        // Make sure info was entered
+        if (!empty($email)) {
+
+            // Make sure email is valid
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                // If email is same as original tell user
+                if ($this->getEmail() == $email) {
+
+                    $emailMsg = 'That\'s your current email!';
+
+                } else {
+
+                    $this->updateEmail($email);
+                    $emailMsg = 'Email updated!';
+
+                }
+
+            // If email is invalid set error message
+            } else {
+
+                $emailMsg = 'Invalid email entered';
+            }
+
+        // If no email entered set error message
+        } else {
+
+            $emailMsg = 'No new email entered';
+        }
+
+        return $emailMsg;
+    }
+
     /**
      * Get all of the data associated with a specific user
      * @return array|null
@@ -202,6 +391,7 @@ class ProfileService {
 
         return null;
     }
+
 
     /**
      * Update a user's name
@@ -322,6 +512,48 @@ class ProfileService {
         if(!empty($email)) {
 
             return $email;
+        }
+
+        return null;
+    }
+
+    /**
+     * Return a user's name
+     * @return string|null
+     */
+    public function getName()
+    {
+        // Get user info
+        $data = $this->getUserInfo();
+
+        // Get email array
+        $name = $data['name'];
+
+        // If email is set, return email
+        if(!empty($name)) {
+
+            return $name;
+        }
+
+        return null;
+    }
+
+    /**
+     * Return a user's username
+     * @return string|null
+     */
+    public function getUsername()
+    {
+        // Get user info
+        $data = $this->getUserInfo();
+
+        // Get email array
+        $username = $data['username'];
+
+        // If email is set, return email
+        if(!empty($username)) {
+
+            return $username;
         }
 
         return null;

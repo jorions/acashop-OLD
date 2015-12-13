@@ -141,159 +141,47 @@ class ProfileController extends Controller
 
 
             // Get all username info
-            $userInfo = $profile->getUserInfo();
-            $name = $userInfo['name'];
-            $username = $userInfo['username'];
+            $name = $profile->getName();
+            $username = $profile->getUsername();
+            $email = $profile->getEmail();
 
             // Now check for if updateName button was pressed
             if ($req->getMethod() == 'POST' && !empty($req->get('updateName'))) {
 
-                $name = $req->get('name');
+                // Check name from form against name in database, updated accordingly in db, and return message
+                $nameMsg = $profile->checkName($req->get('name'));
+                $name = $profile->getName();
 
-                // Make sure info was entered
-                if (!empty($name)) {
-
-                    // Prevent MySQL injection - make sure all characters are legal
-                    if (preg_match("#^[a-zA-Z0-9]+$#", $name)) {
-
-                        // Make sure new name is different than current name
-                        if ($name != $userInfo['name']) {
-
-                            // Set new name
-                            $profile->updateName($name);
-                            $nameMsg = 'Name updated!';
-
-                            // If new name is same as current name tell user
-                        } else {
-
-                            $nameMsg = 'That\'s your current name!';
-                        }
-
-                        // If any illegal characters tell user
-                    } else {
-                        $nameMsg = 'Make sure your name contains only letters and numbers';
-                    }
-
-                    // If name empty set error message
-                } else {
-
-                    $nameMsg = 'No new name entered';
-                }
             }
 
 
             // Now check for if updateUsername button was pressed
             if ($req->getMethod() == 'POST' && !empty($req->get('updateUsername'))) {
 
-                $username = $req->get('username');
+                // Check username from form against name in database, update accordingly in db, and return message
+                $usernameMsg = $profile->checkUsername($req->get('username'));
+                $username = $profile->getUsername();
 
-                // Make sure info was entered
-                if (!empty($username)) {
-
-                    // Prevent MySQL injection - make sure all characters are legal
-                    if (preg_match("#^[a-zA-Z0-9]+$#", $username)) {
-
-                        // Make sure username isn't already used
-                        $login = $this->get('login');
-                        if ($login->checkRegistration($username)) {
-
-                            // Set new username
-                            $profile->updateUsername($username);
-                            $usernameMsg = 'Username updated!';
-
-                            // If username is same as original tell user (instead of giving error message)
-                        } else if ($username == $userInfo['username']) {
-
-                            $usernameMsg = 'That\'s your current username!';
-
-                            // If username already exists tell user
-                        } else {
-
-                            $usernameMsg = 'That username is already taken - sorry!';
-                        }
-
-                        // If any illegal characters tell user
-                    } else {
-                        $usernameMsg = 'Make sure your username contains only letters and numbers';
-                    }
-
-                    // If username empty set error message
-                } else {
-
-                    $usernameMsg = 'No new username entered';
-                }
             }
 
 
             // Now check for if updatePassword button was pressed
             if ($req->getMethod() == 'POST' && !empty($req->get('updatePassword'))) {
 
-                $password = $req->get('password');
-                $passwordCheck = $req->get('passwordCheck');
-
-                // Make sure info was entered
-                if (!empty($password) && !empty($passwordCheck)) {
-
-                    // Prevent MySQL injection - make sure all characters are legal
-                    if (preg_match("#^[a-zA-Z0-9]+$#", $password) && preg_match("#^[a-zA-Z0-9]+$#", $req->get('updatePassword'))) {
-
-                        // Make sure passwords match
-                        if ($password == $passwordCheck) {
-
-                            // Set new password
-                            $profile->updatePassword($password);
-                            $passwordMsg = 'Password updated!';
-
-                            // If passwords don't match tell user
-                        } else {
-                            $passwordMsg = 'Make sure your new password matches in both boxes';
-                        }
-
-                        // If any illegal characters tell user
-                    } else {
-                        $passwordMsg = 'Make sure your password contains only letters and numbers';
-                    }
-
-                // If one of the password fields was empty set error message
-                } else {
-
-                    $passwordMsg = 'Enter your new password in both boxes';
-                }
+                // Check both password entries from form to make sure they matched, update accordingly in db, and return message
+                $passwordMsg = $profile->checkPassword($req->get('password'), $req->get('passwordCheck'));
             }
+
 
             // Now check if the updateEmail button was pressed
             if ($req->getMethod() == 'POST' && !empty($req->get('updateEmail'))) {
 
-                $email = $req->get('email');
-
-                // Make sure info was entered
-                if (!empty($email)) {
-
-                    // Make sure email is valid
-                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-                        $profile->updateEmail($email);
-                        $emailMsg = 'Email updated!';
-
-                    // If email is invalid set error message
-                    } else {
-
-                        $emailMsg = 'Invalid email entered';
-                    }
-
-
-                // If no email entered set error message
-                } else {
-
-                    $emailMsg = 'No new email entered';
-                }
-
-            // If profile page is visited not via POST (GET) it is a normal page visit, so set render variables accordingly
-            } else {
-
+                // Check email from form against email in database, updated accordingly in db, and return message
+                $emailMsg = $profile->checkEmail($req->get('email'));
                 $email = $profile->getEmail();
 
             }
+
 
             // Render the final page with all variables
             return $this->render(
@@ -320,7 +208,7 @@ class ProfileController extends Controller
                 )
             );
 
-            // If they are not logged in render page with login prompt
+        // If they are not logged in render page with login prompt
         } else {
 
             return $this->render(
