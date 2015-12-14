@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4795a69e-5fb0-4126-80d0-cdced135aa40" name="Default" comment="">
+    <list default="true" id="4795a69e-5fb0-4126-80d0-cdced135aa40" name="Default" comment="Fully moved OrderController functions into OrderService">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProfileController.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProfileController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/login.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/LoginForm/registration.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/LoginService.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/LoginService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/OrderController.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/OrderController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php" afterPath="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php" />
     </list>
     <ignored path="acashop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -159,21 +155,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrderService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-86.0">
-              <caret line="129" column="67" selection-start-line="129" selection-start-column="67" selection-end-line="129" selection-end-column="67" />
-              <folding>
-                <element signature="e#49#73#0#PHP" expanded="true" />
-                <marker date="1449814185794" expanded="true" signature="914:1033" placeholder="SELECT * FRO..aca_cart_product..." />
-                <marker date="1449814185794" expanded="true" signature="2741:3095" placeholder="SELECT ord.p..aca_order_product..." />
-                <marker date="1449814185794" expanded="true" signature="3423:3531" placeholder="SELECT * FRO..aca_order..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
@@ -204,15 +185,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductsController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php">
+      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.0">
-              <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.259259">
+              <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
               <folding>
-                <marker date="1450040945698" expanded="true" signature="470:495" placeholder="SELECT * FRO..aca_product..." />
-                <marker date="1450040945698" expanded="true" signature="1450:1562" placeholder="SELECT * FRO..aca_product..." />
-                <marker date="1450040945698" expanded="true" signature="2201:2370" placeholder="SELECT produ..aca_cart_product..." />
+                <element signature="e#49#73#0#PHP" expanded="true" />
+                <marker date="1450069278134" expanded="true" signature="914:1033" placeholder="SELECT * FRO..aca_cart_product..." />
+                <marker date="1450069278134" expanded="true" signature="2741:3095" placeholder="SELECT ord.p..aca_order_product..." />
+                <marker date="1450069278134" expanded="true" signature="3423:3531" placeholder="SELECT * FRO..aca_order..." />
               </folding>
             </state>
           </provider>
@@ -221,46 +213,62 @@
       <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.5686486">
-              <caret line="204" column="48" selection-start-line="204" selection-start-column="48" selection-end-line="204" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.53081083">
+              <caret line="34" column="16" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="16" />
               <folding>
                 <element signature="e#52#109#0#PHP" expanded="true" />
-                <marker date="1449815860690" expanded="true" signature="8257:8968" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8306" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8368" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8369" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8434" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8493" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8512" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8534" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8577" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8660" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8827" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="8280:8968" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9149:10063" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9178:9481" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9220:9304" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9305:9451" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9351:9384" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9518:9562" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9626:9649" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9749:9772" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9883:9906" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="9949:9972" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="10156:10599" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="10219:10263" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="10307:10330" placeholder="..." />
-                <marker date="1449815860690" expanded="true" signature="10519:10551" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5758:6469" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:5807" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:5869" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:5870" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:5935" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:5994" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:6013" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:6035" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:6078" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:6161" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:6328" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="5781:6469" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="6650:7564" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="6679:6982" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="6721:6805" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="6806:6952" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="6852:6885" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7019:7063" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7127:7150" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7250:7273" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7384:7407" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7450:7473" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7657:8100" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7720:7764" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="7808:7831" placeholder="..." />
+                <marker date="1450068945506" expanded="true" signature="8020:8052" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml">
+      <file leaf-file-name="ProfileService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/ProfileService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+            <state vertical-scroll-proportion="-5.3333335">
+              <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="200" selection-end-column="5" />
+              <folding>
+                <element signature="e#49#73#0#PHP" expanded="true" />
+                <marker date="1450039556990" expanded="true" signature="4213:4412" placeholder="SELECT id FR..aca_user..." />
+                <marker date="1450039556990" expanded="true" signature="13187:13293" placeholder="SELECT * FRO..aca_user..." />
+                <marker date="1450039556990" expanded="true" signature="15591:15795" placeholder="SELECT id FR..aca_address..." />
+                <marker date="1450039556990" expanded="true" signature="16242:16354" placeholder="SELECT * FRO..aca_address..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProfileController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.0">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -311,9 +319,7 @@
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Profile/profile.html.twig" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/views/Order/review.order.html.twig" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/CartService.php" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/OrderController.php" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/ProfileService.php" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProfileController.php" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php" />
@@ -322,6 +328,8 @@
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/LoginService.php" />
         <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/LoginController.php" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/OrderController.php" />
+        <option value="$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php" />
       </list>
     </option>
   </component>
@@ -1294,7 +1302,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450039776184</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Fully moved LoginController functions to LoginService">
+      <created>1450049707187</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1450049707187</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1335,7 +1349,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated product page rendering process to format through twig&#10;&#10;Updated slug to be search-engine friendly by not relying on an ID #" />
     <MESSAGE value="Added simplon/mysql service&#10;&#10;Implemented service in ProductsController&#10;&#10;Yet to be implemented in LoginController" />
     <MESSAGE value="Finished database service&#10;&#10;Still need to figure out why login button clicks don't work after form is filled out and registration clicks don't work immediately" />
     <MESSAGE value="Started creating cart service" />
@@ -1360,7 +1373,8 @@
     <MESSAGE value="Added DocBlock to all remaining controllers&#10;&#10;Removed unnecessary DefaultController.php&#10;&#10;Removed unnecessary old LoginForm twigs&#10;&#10;Removed unnecessary routes" />
     <MESSAGE value="Began moving profile controller functionality into ProfileService&#10;&#10;Updated ProfileService to take LoginService as parameter" />
     <MESSAGE value="Fully moved ProfileController functionality into ProfileService&#10;&#10;Restructured ProfileController login check to render login page first" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully moved ProfileController functionality into ProfileService&#10;&#10;Restructured ProfileController login check to render login page first" />
+    <MESSAGE value="Fully moved LoginController functions to LoginService" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fully moved LoginController functions to LoginService" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1653,14 +1667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProfileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75891894">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Resources/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1674,26 +1680,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.0">
-          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
-          <folding>
-            <marker date="1450040945698" expanded="true" signature="470:495" placeholder="SELECT * FRO..aca_product..." />
-            <marker date="1450040945698" expanded="true" signature="1450:1562" placeholder="SELECT * FRO..aca_product..." />
-            <marker date="1450040945698" expanded="true" signature="2201:2370" placeholder="SELECT produ..aca_cart_product..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1731,20 +1717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/ProfileService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.72">
-          <caret line="155" column="7" selection-start-line="155" selection-start-column="7" selection-end-line="155" selection-end-column="121" />
-          <folding>
-            <element signature="e#49#73#0#PHP" expanded="true" />
-            <marker date="1450039556990" expanded="true" signature="4213:4412" placeholder="SELECT id FR..aca_user..." />
-            <marker date="1450039556990" expanded="true" signature="13187:13293" placeholder="SELECT * FRO..aca_user..." />
-            <marker date="1450039556990" expanded="true" signature="15591:15795" placeholder="SELECT id FR..aca_address..." />
-            <marker date="1450039556990" expanded="true" signature="16242:16354" placeholder="SELECT * FRO..aca_address..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/LoginService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="53.074074">
@@ -1765,51 +1737,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php">
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProductsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-86.0">
-          <caret line="129" column="67" selection-start-line="129" selection-start-column="67" selection-end-line="129" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.5254054">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+          <folding>
+            <marker date="1450040945698" expanded="true" signature="470:495" placeholder="SELECT * FRO..aca_product..." />
+            <marker date="1450040945698" expanded="true" signature="1450:1562" placeholder="SELECT * FRO..aca_product..." />
+            <marker date="1450040945698" expanded="true" signature="2201:2370" placeholder="SELECT produ..aca_cart_product..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/ProfileController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/ProfileService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.3333335">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="200" selection-end-column="5" />
           <folding>
             <element signature="e#49#73#0#PHP" expanded="true" />
-            <marker date="1449814185794" expanded="true" signature="914:1033" placeholder="SELECT * FRO..aca_cart_product..." />
-            <marker date="1449814185794" expanded="true" signature="2741:3095" placeholder="SELECT ord.p..aca_order_product..." />
-            <marker date="1449814185794" expanded="true" signature="3423:3531" placeholder="SELECT * FRO..aca_order..." />
+            <marker date="1450039556990" expanded="true" signature="4213:4412" placeholder="SELECT id FR..aca_user..." />
+            <marker date="1450039556990" expanded="true" signature="13187:13293" placeholder="SELECT * FRO..aca_user..." />
+            <marker date="1450039556990" expanded="true" signature="15591:15795" placeholder="SELECT id FR..aca_address..." />
+            <marker date="1450039556990" expanded="true" signature="16242:16354" placeholder="SELECT * FRO..aca_address..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Service/OrderService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.259259">
+          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+          <folding>
+            <element signature="e#49#73#0#PHP" expanded="true" />
+            <marker date="1450069278134" expanded="true" signature="914:1033" placeholder="SELECT * FRO..aca_cart_product..." />
+            <marker date="1450069278134" expanded="true" signature="2741:3095" placeholder="SELECT ord.p..aca_order_product..." />
+            <marker date="1450069278134" expanded="true" signature="3423:3531" placeholder="SELECT * FRO..aca_order..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Aca/Bundle/ShopBundle/Controller/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5686486">
-          <caret line="204" column="48" selection-start-line="204" selection-start-column="48" selection-end-line="204" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.53081083">
+          <caret line="34" column="16" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="16" />
           <folding>
             <element signature="e#52#109#0#PHP" expanded="true" />
-            <marker date="1449815860690" expanded="true" signature="8257:8968" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8306" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8368" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8369" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8434" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8493" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8512" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8534" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8577" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8660" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8827" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="8280:8968" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9149:10063" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9178:9481" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9220:9304" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9305:9451" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9351:9384" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9518:9562" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9626:9649" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9749:9772" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9883:9906" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="9949:9972" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="10156:10599" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="10219:10263" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="10307:10330" placeholder="..." />
-            <marker date="1449815860690" expanded="true" signature="10519:10551" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5758:6469" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:5807" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:5869" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:5870" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:5935" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:5994" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:6013" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:6035" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:6078" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:6161" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:6328" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="5781:6469" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="6650:7564" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="6679:6982" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="6721:6805" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="6806:6952" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="6852:6885" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7019:7063" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7127:7150" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7250:7273" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7384:7407" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7450:7473" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7657:8100" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7720:7764" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="7808:7831" placeholder="..." />
+            <marker date="1450068945506" expanded="true" signature="8020:8052" placeholder="..." />
           </folding>
         </state>
       </provider>

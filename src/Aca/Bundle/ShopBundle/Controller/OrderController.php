@@ -40,9 +40,6 @@ class OrderController extends Controller {
         $shippingMsg = null;
         $billingMsg = null;
         $emailMsg = null;
-        $shippingGood = FALSE;
-        $billingGood = FALSE;
-        $emailGood = FALSE;
         $shippingStreet = null;
         $shippingCity = null;
         $shippingState = null;
@@ -64,35 +61,6 @@ class OrderController extends Controller {
             $shippingZip = $address['zip'];
         }
 
-        // Now that shipping address may have been set, check if checkout button was pressed. If it was, populate render variables
-        // with request values. This way form fills are consistent between page submissions
-        if(!empty($checkoutCheck)) {
-            $shippingStreet = $req->get('shippingStreet');
-            $shippingCity = $req->get('shippingCity');
-            $shippingState = $req->get('shippingState');
-            $shippingZip = $req->get('shippingZip');
-        }
-
-        // Perform validation checks on shipping address
-        // Make sure all fields have content
-        if (!empty($shippingStreet) && !empty($shippingCity) && !empty($shippingState) && !empty($shippingZip) && !empty($checkoutCheck)) {
-
-            // If zip is invalid set $shippingMsg to error
-            if (!preg_match("#^[0-9]+$#", $req->get('shippingZip'))) {
-
-                $shippingMsg = 'Please enter only numbers for zip';
-
-            // If zip is valid set check variable accordingly
-            } else {
-                $shippingGood = TRUE;
-            }
-
-        // If all fields don't have content but review button was pressed set $shippingMsg to error
-        } else if(!empty($checkoutCheck)) {
-            $shippingMsg = 'Please enter a street, city, state, and zip';
-        }
-
-
         // Get billing address
         $address = $profile->getBillingAddress();
 
@@ -104,70 +72,30 @@ class OrderController extends Controller {
             $billingZip = $address['zip'];
         }
 
-        // Now that billing address may have been set, check if checkout button was pressed. If it was, populate render variables
-        // with request values. This way form fills are consistent between page submissions
+        // Get email
+        $email = $profile->getEmail();
+
+        // Now that shipping/billing/email addresses may have been set, check if checkout button was pressed. If it was, populate render variables
+        // with request values. This way form fills are consistent between page submissions even if new address is different than address on file
         if(!empty($checkoutCheck)) {
+            $shippingStreet = $req->get('shippingStreet');
+            $shippingCity = $req->get('shippingCity');
+            $shippingState = $req->get('shippingState');
+            $shippingZip = $req->get('shippingZip');
             $billingStreet = $req->get('billingStreet');
             $billingCity = $req->get('billingCity');
             $billingState = $req->get('billingState');
             $billingZip = $req->get('billingZip');
-        }
-
-        // Perform validation checks on billing address
-        // Make sure all fields have content
-        if (!empty($billingStreet) && !empty($billingCity) && !empty($billingState) && !empty($billingZip) && !empty($checkoutCheck)) {
-
-            // If zip is invalid set $billingMsg to error
-            if (!preg_match("#^[0-9]+$#", $req->get('billingZip'))) {
-
-                $billingMsg = 'Please enter only numbers for zip';
-
-            // If zip is valid set check variable accordingly
-            } else {
-                $billingGood = TRUE;
-            }
-
-        // If all fields don't have content but review button was pressed set $billingMsg to error
-        } else if(!empty($req->get('checkout_check'))) {
-            $billingMsg = 'Please enter a street, city, state, and zip';
-        }
-
-
-        // Get email
-        $email = $profile->getEmail();
-
-        // Now that email may have been set, check if checkout button was pressed. If it was, populate render variables
-        // with request values. This way form fills are consistent between page submissions
-        if(!empty($checkoutCheck)) {
-
             $email = $req->get('email');
-        }
 
-        // Perform validation checks on email
-        // Make sure email has content
-        if (!empty($email)) {
-
-            // If email is invalid set error accordingly
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-                $emailMsg = 'Invalid email entered';
-
-            // If email is valid set check variable accordingly
-            } else {
-
-                $emailGood = TRUE;
-            }
-
-        // If no email entered but review button was pressed set $emailMsg error
-        } else if(!empty($req->get('checkout_check'))) {
-
-            $emailMsg = 'No email entered';
+            $shippingMsg = $order->checkAddress($shippingStreet, $shippingCity, $shippingState, $shippingZip);
+            $billingMsg = $order->checkAddress($billingStreet, $billingCity, $billingState, $billingZip);
+            $emailMsg = $order->checkEmail($email);
         }
 
 
-        // If check variables are true and submit button was pressed submit order and redirect to thank you page
-        if($shippingGood && $billingGood && $emailGood && !empty($checkoutCheck)) {
-
+        // If no error messages are set and submit button was pressed submit order and redirect to thank you page
+        if($shippingMsg == null && $billingMsg == null && $emailMsg == null && !empty($checkoutCheck)) {
 
             // Place order
             $order = $this->get('order');

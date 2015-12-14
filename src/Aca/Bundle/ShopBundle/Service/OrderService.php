@@ -144,4 +144,55 @@ class OrderService {
 
         return $data;
     }
+
+    /**
+     * Determine if an address is valid and return message accordingly
+     * @param $street
+     * @param $city
+     * @param $state
+     * @param $zip
+     * @return null|string
+     */
+    public function checkAddress($street, $city, $state, $zip)
+    {
+
+        $msg = null;
+
+        // Make sure all fields have content
+        if (empty($street) || empty($city) || empty($state) || empty($zip)) {
+
+            $msg = 'Please enter a street, city, state, and zip';
+
+        // Make sure zip is valid
+        } else if (!preg_match("#^[0-9]+$#", $zip)) {
+
+            $msg = 'Please enter only numbers for zip';
+        }
+
+        return $msg;
+    }
+
+    /**
+     * Determine if an email is valid and return message accordingly
+     * @param $email
+     * @return null|string
+     */
+    public function checkEmail($email)
+    {
+        $msg = null;
+
+        // Make sure email has content
+        if (empty($email)) {
+
+            $msg = 'No email entered';
+
+        // Make sure email is valid
+        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            $msg = 'Invalid email entered';
+
+        }
+
+        return $msg;
+    }
 }
