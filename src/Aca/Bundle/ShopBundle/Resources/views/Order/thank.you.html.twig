@@ -27,7 +27,7 @@
             <td class="cart-spacer"></td>
             <td><b>${{ rowPrice|number_format(2, '.', ',') }}</b></td>
         </tr>
-        {% set totalPrice = totalPrice + rowPrice %}
+        {% set totalPrice = totalPrice + (item.price * item.quantity) %}
     {% endfor %}
     {% if totalPrice > 0 %}
         <tr>

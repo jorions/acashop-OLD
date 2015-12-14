@@ -148,69 +148,19 @@ class OrderController extends Controller {
         // Get order details to show on page for receipt
         $orderDetails = $this->get('order')->getSessionOrderDetails();
 
-
-        // Gather together html to put in body of email
-        $body = '
-            <html>
-                <body>
-                    <h1>Your Order Details</h1>
-                    <h3>Shipped To</h3>'
-                    . $orderDetails['shipping_street'] . '<br />'
-                    . $orderDetails['shipping_city'] . ', ' . $orderDetails['shipping_state'] . ' ' . $orderDetails['shipping_zip'] . '<br /><br />
-                    <h3>Billed To</h3>'
-                    . $orderDetails['billing_street'] . '<br />'
-                    . $orderDetails['billing_city'] . ', ' . $orderDetails['billing_state'] . ' ' . $orderDetails['billing_zip'] . '<br /><br />
-                    <hr />
-                    <br />
-                    <h1>Your Purchased Products</h1>
-                    <table>';
-
-        $totalPrice = 0;
-
-        foreach($orderProducts as $item) {
-            $itemTotal = $item['price'] * $item['quantity'];
-            $body .= '
-                    <tr>
-                        <td>
-                            <div style="width:120px;height:120px;display:table-cell;text-align:center;vertical-align:middle;">
-                                <img style="max-height:100px;max-width:120px;" src="' . $item['image'] . '" />
-                            </div>
-                        </td>
-                        <td style="width:400px;font-weight:bold;font-size:16px;">' . $item['name'] . '</td>
-                        <td style="height:60px;width:10px;"></td>
-                        <td>$' . $item['price'] . '</td>
-                        <td style="height:60px;width:10px;"></td>
-                        <td><i> x' . $item['quantity'] . '</i></td>
-                        <td style="height:60px;width:10px;"></td>
-                        <td style="height:60px;width:10px;"></td>
-                        <td><b>' . $itemTotal . '</b></td>
-                    </tr>';
-
-            $totalPrice += $itemTotal;
-        }
-
-        $body .= '
-                <tr>
-                    <td></td>
-                    <td style="width:400px;font-weight:bold;font-size:24px;">Total</td>
-                    <td style="height:60px;width:10px;"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight:bold;font-size:24px;">$' . $totalPrice . '</td>
-                </tr>
-            </table></body></html>';
-
-
         // Send email
         $message = \Swift_Message::newInstance()
             ->setSubject('Receipt For Your ACAShop Order')
             ->setFrom('acashopemail@gmail.com')
             ->setTo($orderDetails['email'])
             ->setBody(
-                $body,
+                $this->renderView(
+                    'AcaShopBundle:Email:receipt.html.twig',
+                    array(
+                        'products' => $orderProducts,
+                        'details' => $orderDetails
+                    )
+                ),
                 'text/html'
             );
 
